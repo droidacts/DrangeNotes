@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "this to log the shot", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
     }
@@ -45,12 +45,23 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            R.id.menu_about -> {
+                Snackbar.make(binding.root, "App ver 0.2 by CC", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        /* // if fragment tag is replaced by fragmentContainerView as recommended, then
+           // the fragment has to be found before finding the navController
+        val hFrag=supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
+        val navController = hFrag.navController
+         */
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()

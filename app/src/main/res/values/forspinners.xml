@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_sticknames">
+        <item>@string/default_stick_14</item>
+        <item>@string/default_stick_13</item>
+        <item>@string/default_stick_12</item>
+        <item>@string/default_stick_11</item>
+        <item>@string/default_stick_10</item>
+        <item>@string/default_stick_9</item>
+        <item>@string/default_stick_8</item>
+        <item>@string/default_stick_7</item>
+        <item>@string/default_stick_6</item>
+        <item>@string/default_stick_5</item>
+        <item>@string/default_stick_4</item>
+        <item>@string/default_stick_3</item>
+        <item>@string/default_stick_2</item>
+        <item>@string/default_stick_1</item>
+    </string-array>
+    <string-array name="default_golfers">
+        <item>Myself</item>
+        <item>others</item>
+    </string-array>
+</resources>

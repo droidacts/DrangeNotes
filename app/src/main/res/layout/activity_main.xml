@@ -29,7 +29,8 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email"
-        android:contentDescription="@string/hello_second_fragment" />
+        android:contentDescription="@string/hello_second_fragment"
+        app:backgroundTint="@android:color/holo_green_dark"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

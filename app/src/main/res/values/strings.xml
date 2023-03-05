@@ -1,14 +1,46 @@
 <resources>
-    <string name="app_name">DrangeNotes</string>
-    <string name="action_settings">settings</string>
-    <string name="menu_item3">About</string>
-    <string name="meni_item2">logs</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">This is main UI</string>
-    <string name="second_fragment_label">Supplemental log entries shown</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="first_fragment_label">Driving Range Logs</string>
+    <string name="second_fragment_label">Driving Range Notes</string>
+    <string name="next">Paper Form</string>
+    <string name="previous">Compact style</string>
+    <string name="hello_first_fragment">Golfer</string>
+    <string name="hello_second_fragment">Log the entry</string>
+    <!-- -->
+    <string name="app_name">DrangeNotes</string>
+    <string name="menu_item_settings">settings</string>
+    <string name="menu_item3">About</string>
+    <string name="menu_item2">logs</string>
+    <string name="menu_item_export">export</string>
+    <string name="powervalue_full">Full</string>
+    <string name="powervalue_75">3/4</string>
+    <string name="powervalue_50">1/2</string>
+    <string name="powervalue_low">Chip</string>
+    <string name="default_commentbox">Temp, loc, comments</string>
+    <string name="text_yards">Yards</string>
+    <string name="text_meters">meters</string>
+    <string name="default_stick_14">Lw</string>
+    <string name="default_stick_13">Sw</string>
+    <string name="default_stick_12">Gw</string>
+    <string name="default_stick_11">Pw</string>
+    <string name="default_stick_10">#9</string>
+    <string name="default_stick_9">#8</string>
+    <string name="default_stick_8">#7</string>
+    <string name="default_stick_7">#6</string>
+    <string name="default_stick_6">#5</string>
+    <string name="default_stick_5">#4</string>
+    <string name="default_stick_4">3H</string>
+    <string name="default_stick_3">2H</string>
+    <string name="default_stick_2">D-hi/3W</string>
+    <string name="default_stick_1">Driver</string>
+    <string name="action_text_record">Record</string>
+    <string name="button_straight_0">straight?</string>
+    <string name="button_straight_1">NICE</string>
+    <string name="button_left_0">\?</string>
+    <string name="button_left_1">L</string>
+    <string name="button_missed_0">Miss?</string>
+    <string name="button_missed_1">Missed</string>
+    <string name="button_right_0">\?</string>
+    <string name="button_right_1">R</string>
+    <string name="text_yds">yds</string>
 </resources>

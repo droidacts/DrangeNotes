@@ -6,22 +6,789 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <TextView
+    <EditText
         android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/default_commentbox"
+        android:importantForAutofill="no"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
     <Button
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/playername2"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:entries="@array/default_golfers"
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:columnCount="5"
+        app:layout_constraintBottom_toTopOf="@+id/textview_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintTop_toBottomOf="@+id/playername2"
+        app:rowCount="15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:ems="4"
+            android:gravity="fill_horizontal|top"
+            android:text="@string/text_yards"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center_horizontal"
+            android:text="@string/powervalue_full"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center_horizontal"
+            android:text="@string/powervalue_75"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center_horizontal"
+            android:text="@string/powervalue_50"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:gravity="center_horizontal"
+            android:text="@string/powervalue_low"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_14"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_13"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_12"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_11"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_9"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_8"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_7"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_6"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="9" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_5"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_4"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="11" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="13" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_stick_1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="0"
+            app:layout_columnWeight="1.5"
+            app:layout_row="14" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="4" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="5" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="6"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="7"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="8"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="9"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="10"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="11"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="12"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="13"
+            style="@style/TextInputB"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="14"
+            style="@style/TextInputA"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="2" />
+
+        <EditText
+            style="@style/TextInputA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="4" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="5"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="6"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="7"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="8"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="9"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="10"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="11"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="12"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="13"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="14"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/cell31"
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="1"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/cell32"
+            style="@style/TextInputA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="2"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="3"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="4"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="5"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="6"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="7"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:ems="3"
+            android:inputType="number"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="8"
+            android:importantForAutofill="no" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="9" />
+
+        <EditText
+            style="@style/TextInputA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="2" />
+
+        <EditText
+            style="@style/TextInputA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="3" />
+
+        <EditText
+            style="@style/TextInputB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_yds"
+            android:inputType="number"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="4"
+            android:importantForAutofill="no" />
+
+        <CheckedTextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/baseline_arrow_upward_24"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:checkMark="@android:drawable/btn_dialog"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/button_straight_0"
+            android:textAlignment="center"
+            app:layout_column="3"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="1"
+            app:layout_row="12" />
+
+        <CheckedTextView
+            android:id="@+id/checkedTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkMark="@android:drawable/checkbox_off_background"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/button_missed_0"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_column="3"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="1"
+            app:layout_row="14" />
+
+        <CheckedTextView
+            android:id="@+id/checkedTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkMark="@android:drawable/btn_dialog"
+            android:drawableRight="@drawable/baseline_turn_slight_right_24"
+            android:gravity="fill_horizontal"
+            android:textAlignment="gravity"
+            app:layout_column="4"
+            app:layout_columnWeight="1"
+            app:layout_row="13" />
+
+        <CheckedTextView
+            android:id="@+id/checkedTextView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkMark="@android:drawable/btn_dialog"
+            android:drawableLeft="@drawable/baseline_turn_slight_left_24"
+            android:gravity="fill_horizontal"
+            android:textAlignment="gravity"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="13" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

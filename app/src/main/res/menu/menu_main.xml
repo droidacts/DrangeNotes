@@ -3,16 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="org.xluz.droidacts.drangenotes.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/menu_settings"
+        android:orderInCategory="101"
+        android:title="@string/menu_item_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_logs"
-        android:orderInCategory="101"
-        android:title="@string/meni_item2" />
+        android:orderInCategory="103"
+        android:title="@string/menu_item2" />
+    <item
+        android:id="@+id/menu_export"
+        android:orderInCategory="102"
+        android:title="@string/menu_item_export" />
     <item
         android:id="@+id/menu_about"
-        android:orderInCategory="102"
+        android:orderInCategory="104"
         android:title="@string/menu_item3" />
 </menu>
