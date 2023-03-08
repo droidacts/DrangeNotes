@@ -53,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_turn_slight_left_24"
                 android:textOff="@string/button_left_0"
-                android:textOn="@string/button_left_1" />
+                android:textOn="@string/button_left_1"
+                tools:ignore="RtlHardcoded" />
 
             <ToggleButton
                 android:id="@+id/toggleButton6"
@@ -61,7 +62,8 @@
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/baseline_turn_slight_right_24"
                 android:textOff="@string/button_right_0"
-                android:textOn="@string/button_right_1" />
+                android:textOn="@string/button_right_1"
+                tools:ignore="RtlHardcoded" />
 
         </TableRow>
 

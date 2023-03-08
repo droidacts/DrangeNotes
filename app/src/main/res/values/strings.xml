@@ -2,8 +2,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Driving Range Logs</string>
     <string name="second_fragment_label">Driving Range Notes</string>
-    <string name="next">Paper Form</string>
-    <string name="previous">Compact style</string>
+    <string name="next">Notes style</string>
+    <string name="previous">\>Compact</string>
     <string name="hello_first_fragment">Golfer</string>
     <string name="hello_second_fragment">Log the entry</string>
     <!-- -->
@@ -31,10 +31,10 @@
     <string name="default_stick_5">#4</string>
     <string name="default_stick_4">3H</string>
     <string name="default_stick_3">2H</string>
-    <string name="default_stick_2">D-hi/3W</string>
+    <string name="default_stick_2">2W/3W</string>
     <string name="default_stick_1">Driver</string>
     <string name="action_text_record">Record</string>
-    <string name="button_straight_0">straight?</string>
+    <string name="button_straight_0">Straight?</string>
     <string name="button_straight_1">NICE</string>
     <string name="button_left_0">\?</string>
     <string name="button_left_1">L</string>
@@ -43,4 +43,5 @@
     <string name="button_right_0">\?</string>
     <string name="button_right_1">R</string>
     <string name="text_yds">yds</string>
+    <string name="text_spaceholder1" />
 </resources>
