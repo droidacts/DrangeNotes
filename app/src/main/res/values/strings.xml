@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Driving Range Logs</string>
     <string name="second_fragment_label">Driving Range Notes</string>
@@ -13,8 +13,8 @@
     <string name="menu_item2">logs</string>
     <string name="menu_item_export">export</string>
     <string name="powervalue_full">Full</string>
-    <string name="powervalue_75">3/4</string>
-    <string name="powervalue_50">1/2</string>
+    <string name="powervalue_75" tools:ignore="TypographyFractions">3/4</string>
+    <string name="powervalue_50" tools:ignore="TypographyFractions">1/2</string>
     <string name="powervalue_low">Chip</string>
     <string name="default_commentbox">Temp, loc, comments</string>
     <string name="text_yards">Yards</string>
@@ -34,13 +34,13 @@
     <string name="default_stick_2">2W/3W</string>
     <string name="default_stick_1">Driver</string>
     <string name="action_text_record">Record</string>
-    <string name="button_straight_0">Straight?</string>
+    <string name="button_straight_0">Straight</string>
     <string name="button_straight_1">NICE</string>
-    <string name="button_left_0">\?</string>
+    <string name="button_left_0">L\?</string>
     <string name="button_left_1">L</string>
     <string name="button_missed_0">Miss?</string>
     <string name="button_missed_1">Missed</string>
-    <string name="button_right_0">\?</string>
+    <string name="button_right_0">R\?</string>
     <string name="button_right_1">R</string>
     <string name="text_yds">yds</string>
     <string name="text_spaceholder1" />

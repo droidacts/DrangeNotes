@@ -35,7 +35,25 @@ class FirstFragment : Fragment() {
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-        //binding.toggleButton8.setOnClickListener()
+        //The folllowing codes make a button group which only 1 of 3 buttons can be checked
+        binding.buttonSt.setOnClickListener{
+            if(binding.buttonSt.isChecked) {
+                binding.buttonTurnLeft.isChecked = false
+                binding.buttonTurnRight.isChecked = false
+            }
+        }
+        binding.buttonTurnLeft.setOnClickListener{
+            if(binding.buttonTurnLeft.isChecked) {
+                binding.buttonTurnRight.isChecked = false
+                binding.buttonSt.isChecked = false
+            }
+        }
+        binding.buttonTurnRight.setOnClickListener{
+            if(binding.buttonTurnRight.isChecked) {
+                binding.buttonSt.isChecked = false
+                binding.buttonTurnLeft.isChecked = false
+            }
+        }
     }
 
     override fun onDestroyView() {

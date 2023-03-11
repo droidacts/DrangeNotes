@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_about -> {
-                Snackbar.make(binding.root, "App ver 0.3 by CC", Snackbar.LENGTH_LONG)
+                Snackbar.make(binding.root, "App ver 0.33 by CC", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
                 true
             }

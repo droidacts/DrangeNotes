@@ -35,6 +35,51 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+        //
+        binding.checkMiss.isChecked = false
+        binding.checkMiss.setOnClickListener {
+            if(binding.checkMiss.isChecked) {
+                binding.checkMiss.isChecked = false
+                binding.checkMiss.setText(R.string.button_missed_0)
+            } else {
+                binding.checkMiss.isChecked = true
+                binding.checkMiss.setText(R.string.button_missed_1)
+            }
+        }
+        //
+        //binding.checkSt.isChecked = false
+        binding.checkSt.setOnClickListener {
+            binding.checkSt.isChecked = !binding.checkSt.isChecked
+            if(binding.checkSt.isChecked) {
+                binding.checkSt.setText(R.string.button_straight_1)
+                binding.checkL.setText(R.string.button_left_0)
+                binding.checkR.setText(R.string.button_right_0)
+                binding.checkL.isChecked = false
+                binding.checkR.isChecked = false
+            } else {
+                binding.checkSt.setText(R.string.button_straight_0)
+            }
+        }
+        binding.checkL.setOnClickListener {
+            binding.checkL.isChecked = !binding.checkL.isChecked
+            if(binding.checkL.isChecked) {
+                binding.checkL.setText(R.string.button_left_1)
+                binding.checkSt.setText(R.string.button_straight_0)
+                binding.checkR.setText(R.string.button_right_0)
+                binding.checkSt.isChecked = false
+                binding.checkR.isChecked = false
+            }
+        }
+        binding.checkR.setOnClickListener {
+            binding.checkR.isChecked = !binding.checkR.isChecked
+            if(binding.checkR.isChecked) {
+                binding.checkR.setText(R.string.button_right_1)
+                binding.checkSt.setText(R.string.button_straight_0)
+                binding.checkL.setText(R.string.button_left_0)
+                binding.checkSt.isChecked = false
+                binding.checkL.isChecked = false
+            }
+        }
     }
 
     override fun onDestroyView() {

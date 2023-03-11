@@ -33,7 +33,7 @@
             android:layout_height="wrap_content">
 
             <ToggleButton
-                android:id="@+id/toggleButton4"
+                android:id="@+id/button_st"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
@@ -48,7 +48,7 @@
             android:layout_height="match_parent">
 
             <ToggleButton
-                android:id="@+id/toggleButton5"
+                android:id="@+id/button_turn_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/baseline_turn_slight_left_24"
@@ -57,9 +57,10 @@
                 tools:ignore="RtlHardcoded" />
 
             <ToggleButton
-                android:id="@+id/toggleButton6"
+                android:id="@+id/button_turn_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="false"
                 android:drawableRight="@drawable/baseline_turn_slight_right_24"
                 android:textOff="@string/button_right_0"
                 android:textOn="@string/button_right_1"
@@ -72,7 +73,7 @@
             android:layout_height="match_parent">
 
             <ToggleButton
-                android:id="@+id/toggleButton8"
+                android:id="@+id/button_miss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_span="2"
