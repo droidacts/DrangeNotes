@@ -8,7 +8,7 @@
     <string name="hello_second_fragment">Log the entry</string>
     <!-- -->
     <string name="app_name">DrangeNotes</string>
-    <string name="menu_item_settings">settings</string>
+    <string name="menu_item_settings">use meters</string>
     <string name="menu_item3">About</string>
     <string name="menu_item2">logs</string>
     <string name="menu_item_export">export</string>
@@ -23,12 +23,12 @@
     <string name="default_stick_13">Sw</string>
     <string name="default_stick_12">Gw</string>
     <string name="default_stick_11">Pw</string>
-    <string name="default_stick_10">#9</string>
-    <string name="default_stick_9">#8</string>
-    <string name="default_stick_8">#7</string>
-    <string name="default_stick_7">#6</string>
-    <string name="default_stick_6">#5</string>
-    <string name="default_stick_5">#4</string>
+    <string name="default_stick_10">9i</string>
+    <string name="default_stick_9">8i</string>
+    <string name="default_stick_8">7i</string>
+    <string name="default_stick_7">6i</string>
+    <string name="default_stick_6">5i</string>
+    <string name="default_stick_5">4i</string>
     <string name="default_stick_4">3H</string>
     <string name="default_stick_3">2H</string>
     <string name="default_stick_2">2W/3W</string>

@@ -4,6 +4,7 @@
     tools:context="org.xluz.droidacts.drangenotes.MainActivity">
     <item
         android:id="@+id/menu_settings"
+        android:checkable="true"
         android:orderInCategory="101"
         android:title="@string/menu_item_settings"
         app:showAsAction="never" />
