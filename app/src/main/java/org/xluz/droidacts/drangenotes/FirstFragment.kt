@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.xluz.droidacts.drangenotes.databinding.FragmentFirstBinding
@@ -12,7 +14,7 @@ import org.xluz.droidacts.drangenotes.databinding.FragmentFirstBinding
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentFirstBinding? = null
     private var mShotdata1 = Shotdata()
@@ -34,6 +36,12 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mShotdata1 = mViewmodel.singleShot.value!!
+
+        binding.playernames.onItemSelectedListener = this
+        binding.sticklist.onItemSelectedListener = this
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId -> saveStateToViewmodel() }
+        binding.commentbox.addTextChangedListener { saveStateToViewmodel() }
+        binding.DistanceYards.addTextChangedListener { saveStateToViewmodel() }
         binding.buttonFirst.setOnClickListener {
             saveStateToViewmodel()
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -65,10 +73,17 @@ class FirstFragment : Fragment() {
         }
 
         // retrive last known selections
-        binding.playernames.setSelection(mShotdata1.golfer)
-        binding.sticklist.setSelection(mShotdata1.stick)
-        binding.radioGroup.check(mShotdata1.power)
+        // note the valid values of each field
         binding.commentbox.setText(mShotdata1.comment)
+        binding.playernames.setSelection(mShotdata1.golfer) // 0, 1, ..
+        binding.sticklist.setSelection(mShotdata1.stick)    // 0..13
+        binding.radioGroup.clearCheck()
+        when(mShotdata1.power) {
+            1 -> binding.radioGroup.check(R.id.radioButton1)
+            2 -> binding.radioGroup.check(R.id.radioButton2)
+            3 -> binding.radioGroup.check(R.id.radioButton3)
+            4 -> binding.radioGroup.check(R.id.radioButton4)
+        }
         if(mShotdata1.dist.toInt() > 0)
             binding.DistanceYards.setText(mShotdata1.dist.toInt().toString())
         else
@@ -127,7 +142,6 @@ class FirstFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        saveStateToViewmodel()
         super.onDestroyView()
         _binding = null
     }
@@ -141,7 +155,6 @@ class FirstFragment : Fragment() {
 
         mShotdata1.golfer = binding.playernames.selectedItemPosition
         mShotdata1.stick = binding.sticklist.selectedItemPosition
-        mShotdata1.power = binding.radioGroup.checkedRadioButtonId    //need map from id to text
         mShotdata1.comment = binding.commentbox.text.toString()
         mShotdata1.dist = if(binding.DistanceYards.text.toString() != "") {
                                 binding.DistanceYards.text.toString().toFloat()
@@ -151,7 +164,22 @@ class FirstFragment : Fragment() {
         if(binding.buttonTurnLeft.isChecked) mShotdata1.sshape = 2
         if(binding.buttonTurnRight.isChecked) mShotdata1.sshape = 3
         if(binding.buttonMiss.isChecked) mShotdata1.sshape += 4
+        when(binding.radioGroup.checkedRadioButtonId) {
+            R.id.radioButton4 -> mShotdata1.power = 4
+            R.id.radioButton3 -> mShotdata1.power = 3
+            R.id.radioButton2 -> mShotdata1.power = 2
+            R.id.radioButton1 -> mShotdata1.power = 1
+        }
 
         mViewmodel.singleShot.value = mShotdata1.copy()
+        mViewmodel.datrdy = true
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        saveStateToViewmodel()
     }
 }

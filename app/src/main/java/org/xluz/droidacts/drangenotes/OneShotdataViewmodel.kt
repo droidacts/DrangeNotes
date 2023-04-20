@@ -26,9 +26,10 @@ class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : Vie
     var vDist: Float
         get() = savedStateHandle.get<Float>(currKey+"_dist") ?: 0.0f
         set(value) = savedStateHandle.set(currKey+"_dist", value)
+    var datrdy: Boolean = false
 
     init {
-        val s =Shotdata(vDist, vPower, vStick, 0, vGolfer, "", vComment)
+        val s = Shotdata(vDist, vPower, vStick, 0, vGolfer, "", vComment)
         singleShot.value = s.copy()
     }
 

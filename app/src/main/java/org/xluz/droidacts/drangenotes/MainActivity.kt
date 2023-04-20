@@ -2,6 +2,7 @@ package org.xluz.droidacts.drangenotes
 
 import android.os.Bundle
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,7 +17,7 @@ import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 private const val SETTINGKEY1 = "appSettings_use_meters"
 private const val LASTSESSIONLOG = "last_session_data"
 private const val LASTSESSIONLOG_KEY1 = "last_shot"
-private const val LASTSESSIONLOG_KEYALL = "all_shot"
+private const val LASTSESSIONLOG_KEYALL = "all_shots"
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,21 +38,27 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        manyShots.clear()
+
         binding.fab.setOnClickListener {
 
             mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
             val singleshotv = mainViewmodel.singleShot.value
-            if(singleshotv != null) {
+            if((singleshotv != null) && mainViewmodel.datrdy) {
+                singleshotv.settimeStamp()
                 manyShots.add(singleshotv)
                 val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, Context.MODE_PRIVATE)
                 with(appSharedpref1.edit()) {
                     putString(LASTSESSIONLOG_KEY1, singleshotv.toString())
                     apply()
                 }
-            }
-            Snackbar.make(it, "Shot-> "+singleshotv.toString(), Snackbar.LENGTH_LONG)
+                Snackbar.make(it, "Shot("+manyShots.size+") "+singleshotv.toString(), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            } else
+                Snackbar.make(it, "No data.", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -83,6 +90,17 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
+            R.id.menu_export -> {
+                val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, manyShots.toString())
+                }
+                val chooser = Intent.createChooser(
+                    exportAllCurrShotsReq, "Export current shots data"
+                )
+                startActivity(chooser)
+                true
+            }
             else -> {
                 super.onOptionsItemSelected(item)
             }
@@ -102,11 +120,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putString(LASTSESSIONLOG_KEYALL, manyShots.toString())
         var outstr = ""
         for(itm in manyShots)
             outstr += itm.toString() + "\n"
         // mostly for debugging
-        outState.putString(LASTSESSIONLOG_KEYALL, outstr)
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, Context.MODE_PRIVATE)
         with(appSharedpref1.edit()) {
             putString(LASTSESSIONLOG_KEYALL, outstr)
