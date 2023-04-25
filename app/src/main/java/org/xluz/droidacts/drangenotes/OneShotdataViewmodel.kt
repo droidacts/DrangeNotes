@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 
-
 private const val currKey = "last_shot"
 
 class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : ViewModel() {

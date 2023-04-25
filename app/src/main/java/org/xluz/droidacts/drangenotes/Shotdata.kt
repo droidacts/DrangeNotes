@@ -2,7 +2,6 @@ package org.xluz.droidacts.drangenotes
 
 import java.util.*
 
-
 // need to reconcile with table Shots in cc-golf.db
 data class Shotdata(
     var dist: Float = 0.0f ,       //col 2

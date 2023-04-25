@@ -2,6 +2,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Driving Range Logs</string>
     <string name="second_fragment_label">Driving Range Notes</string>
+    <string name="logs_fragment_label">Shots logged</string>
     <string name="next">Notes style</string>
     <string name="previous">\>Compact</string>
     <string name="hello_first_fragment">Golfer</string>
@@ -10,8 +11,9 @@
     <string name="app_name">DrangeNotes</string>
     <string name="menu_item_settings">use meters</string>
     <string name="menu_item3">About</string>
-    <string name="menu_item2">logs</string>
-    <string name="menu_item_export">export</string>
+    <string name="menu_item2">-\> logs</string>
+    <string name="menu_item_export">export logs</string>
+    <string name="menu_item_clrlogs">clear logs</string>
     <string name="powervalue_full">Full</string>
     <string name="powervalue_75" tools:ignore="TypographyFractions">3/4</string>
     <string name="powervalue_50" tools:ignore="TypographyFractions">1/2</string>
@@ -44,4 +46,7 @@
     <string name="button_right_1">R</string>
     <string name="text_yds">yds</string>
     <string name="text_spaceholder1" />
+    <string name="large_text">
+        "Not yet implemented. You may just exit and restart the app to clear.\n"
+    </string>
 </resources>

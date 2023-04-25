@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.xluz.droidacts.drangenotes.databinding.FragmentFirstBinding
 
-/**
+/** need a copyright and GPL notice here
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
@@ -175,8 +175,9 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         mViewmodel.datrdy = true
     }
 
+    // Following 2 are implementing AdapterView.OnItemSelectedListener
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        TODO("No need")
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

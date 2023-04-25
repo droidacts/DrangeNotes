@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        manyShots.clear()
+        manyShots.clear()   //making sure manyShots is accessed at least once and initialized
 
         binding.fab.setOnClickListener {
 
@@ -90,7 +90,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
-            R.id.menu_export -> {
+            R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
+                manyShots.clear()
+                true
+            }
+            R.id.menu_export -> {   // currently disabled awaiting refactoring
                 val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
                     putExtra(Intent.EXTRA_TEXT, manyShots.toString())
@@ -99,6 +103,16 @@ class MainActivity : AppCompatActivity() {
                     exportAllCurrShotsReq, "Export current shots data"
                 )
                 startActivity(chooser)
+                true
+            }
+            R.id.menu_logs -> {
+                stashManyShots()
+                var outstr = "Shots: "
+                outstr += manyShots.size.toString() + "\n"
+                for (itm in manyShots)
+                    outstr += itm.toString() + "\n"
+                findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
+                    navigate(NavGraphDirections.actionGlobalLogsFragment(outstr))
                 true
             }
             else -> {
@@ -121,11 +135,15 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString(LASTSESSIONLOG_KEYALL, manyShots.toString())
+        stashManyShots()
+    }
+
+    private fun stashManyShots() {
         var outstr = ""
-        for(itm in manyShots)
+        for (itm in manyShots)
             outstr += itm.toString() + "\n"
-        // mostly for debugging
-        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, Context.MODE_PRIVATE)
+        // use to pass data among fragments
+        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
         with(appSharedpref1.edit()) {
             putString(LASTSESSIONLOG_KEYALL, outstr)
             apply()

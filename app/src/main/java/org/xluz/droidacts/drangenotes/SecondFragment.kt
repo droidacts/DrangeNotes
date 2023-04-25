@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.xluz.droidacts.drangenotes.databinding.FragmentSecondBinding
 
@@ -13,16 +14,15 @@ import org.xluz.droidacts.drangenotes.databinding.FragmentSecondBinding
  */
 class SecondFragment : Fragment() {
 
+    val mViewmodel2: OneShotdataViewmodel by activityViewModels()
     private var _binding: FragmentSecondBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
@@ -31,6 +31,8 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mViewmodel2.datrdy = false
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
@@ -46,7 +48,7 @@ class SecondFragment : Fragment() {
                 binding.checkMiss.setText(R.string.button_missed_1)
             }
         }
-        //
+        // linking these 3 buttons into a button group
         //binding.checkSt.isChecked = false
         binding.checkSt.setOnClickListener {
             binding.checkSt.isChecked = !binding.checkSt.isChecked

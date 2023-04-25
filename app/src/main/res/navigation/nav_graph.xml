@@ -25,4 +25,17 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/logsFragment"
+        android:name="org.xluz.droidacts.drangenotes.LogsFragment"
+        android:label="@string/logs_fragment_label"
+        tools:layout="@layout/fragment_logs" >
+        <argument
+            android:name="msgtxt"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_logsFragment"
+        app:destination="@id/logsFragment" />
 </navigation>
