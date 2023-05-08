@@ -1,8 +1,11 @@
 package org.xluz.droidacts.drangenotes
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
 // need to reconcile with table Shots in cc-golf.db
+@Entity(tableName = "Shots")
 data class Shotdata(
     var dist: Float = 0.0f ,       //col 2
     var power: Int = 0 ,           //col 3
@@ -13,7 +16,8 @@ data class Shotdata(
     var comment: String = ""       //col 9
 )
 {
-    var sn: Int = 0                //col 1, probably not used, should be filled in by sqlite
+    @PrimaryKey
+    var sn: Int = 0                //col 1, probably not used, should be filled/autoincrement by sqlite
     var datetime: Int? = null      //col 7, in unix time
     fun settimeStamp(): String {
         datetime = ((Date().time)/1000).toInt()
