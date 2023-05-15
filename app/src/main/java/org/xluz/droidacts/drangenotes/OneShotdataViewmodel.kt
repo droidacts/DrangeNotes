@@ -3,6 +3,8 @@ package org.xluz.droidacts.drangenotes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 private const val currKey = "last_shot"
 
@@ -32,5 +34,15 @@ class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : Vie
         singleShot.value = s.copy()
     }
 
+    fun logCurrShot() {
+        val theDB = CCgolfDB.getOne()
+        viewModelScope.launch {
+            singleShot.value?.let {
+                if (theDB != null) {
+                    theDB.theDAO().logOneshot(it)
+                }
+            }
+        }
+    }
 
 }

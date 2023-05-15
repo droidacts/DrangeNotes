@@ -20,7 +20,7 @@
         android:title="@string/menu_item_export" />
     <item
         android:id="@+id/menu_clearlogs"
-        android:enabled="false"
+        android:enabled="true"
         android:orderInCategory="104"
         android:title="@string/menu_item_clrlogs" />
     <item

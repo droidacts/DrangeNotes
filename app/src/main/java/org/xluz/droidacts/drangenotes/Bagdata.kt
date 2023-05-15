@@ -2,9 +2,17 @@ package org.xluz.droidacts.drangenotes
 
 import androidx.room.*
 
-@Entity(tableName = "Bags")
+@Entity(
+    tableName = "Bags",
+    foreignKeys = [
+        ForeignKey(entity=Stickdata::class, parentColumns=["id"], childColumns=["s01"]),
+        ForeignKey(entity=Golferdata::class, parentColumns=["id"], childColumns=["golfer"])
+    ]
+)
 data class Bagdata(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate=true) val id: Int,
+    @ColumnInfo(defaultValue = "0")
+    val golfer: Int = 0,    //0 is valid (1st) row in Golfers table
     val desc: String?,
     val s01: Int,
     val s02: Int?,

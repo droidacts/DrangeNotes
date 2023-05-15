@@ -75,8 +75,8 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         // retrive last known selections
         // note the valid values of each field
         binding.commentbox.setText(mShotdata1.comment)
-        binding.playernames.setSelection(mShotdata1.golfer) // 0, 1, ..
-        binding.sticklist.setSelection(mShotdata1.stick)    // 0..13
+        mShotdata1.golfer?.let { binding.playernames.setSelection(it) } // 0, 1, ..
+        binding.sticklist.setSelection(mShotdata1.stick - 1)    // 0..13; temp fix
         binding.radioGroup.clearCheck()
         when(mShotdata1.power) {
             1 -> binding.radioGroup.check(R.id.radioButton1)
@@ -154,7 +154,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
     private fun saveStateToViewmodel() {
 
         mShotdata1.golfer = binding.playernames.selectedItemPosition
-        mShotdata1.stick = binding.sticklist.selectedItemPosition
+        mShotdata1.stick = binding.sticklist.selectedItemPosition + 1    //0 invalid in table; temporary
         mShotdata1.comment = binding.commentbox.text.toString()
         mShotdata1.dist = if(binding.DistanceYards.text.toString() != "") {
                                 binding.DistanceYards.text.toString().toFloat()
@@ -163,7 +163,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         if(binding.buttonSt.isChecked) mShotdata1.sshape = 1
         if(binding.buttonTurnLeft.isChecked) mShotdata1.sshape = 2
         if(binding.buttonTurnRight.isChecked) mShotdata1.sshape = 3
-        if(binding.buttonMiss.isChecked) mShotdata1.sshape += 4
+        if(binding.buttonMiss.isChecked) mShotdata1.sshape = mShotdata1.sshape!! + 4
         when(binding.radioGroup.checkedRadioButtonId) {
             R.id.radioButton4 -> mShotdata1.power = 4
             R.id.radioButton3 -> mShotdata1.power = 3
@@ -172,7 +172,8 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         }
 
         mViewmodel.singleShot.value = mShotdata1.copy()
-        mViewmodel.datrdy = true
+        // Note that dist and stick are NOTNULL in DB
+        if(mShotdata1.dist > 0.0) mViewmodel.datrdy = true
     }
 
     // Following 2 are implementing AdapterView.OnItemSelectedListener

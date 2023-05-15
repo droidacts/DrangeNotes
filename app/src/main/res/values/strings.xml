@@ -12,7 +12,7 @@
     <string name="menu_item_settings">use meters</string>
     <string name="menu_item3">About</string>
     <string name="menu_item2">-\> logs</string>
-    <string name="menu_item_export">export logs</string>
+    <string name="menu_item_export">backup DB</string>
     <string name="menu_item_clrlogs">clear logs</string>
     <string name="powervalue_full">Full</string>
     <string name="powervalue_75" tools:ignore="TypographyFractions">3/4</string>

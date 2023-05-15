@@ -12,7 +12,12 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
+import androidx.sqlite.db.SimpleSQLiteQuery
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
+import java.util.Date
 
 private const val SETTINGKEY1 = "appSettings_use_meters"
 private const val LASTSESSIONLOG = "last_session_data"
@@ -25,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var manyShots = mutableListOf<Shotdata>()
     private lateinit var mainViewmodel: OneShotdataViewmodel
+    lateinit var theDB: CCgolfDB
+    lateinit var theDAO: CCgolfDBDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +59,10 @@ class MainActivity : AppCompatActivity() {
                     putString(LASTSESSIONLOG_KEY1, singleshotv.toString())
                     apply()
                 }
+                mainViewmodel.logCurrShot()
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    theDAO.logOneshot(singleshotv)
+//                }
                 Snackbar.make(it, "Shot("+manyShots.size+") "+singleshotv.toString(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
             } else
@@ -59,6 +70,8 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
+        theDB = CCgolfDB.get(this)
+        theDAO = theDB.theDAO()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -92,9 +105,15 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
                 manyShots.clear()
+                val c = theDB.query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(TRUNCATE)"))
+                if(c.moveToFirst())
+                Snackbar.make(binding.root, "WAL checkpoint: (${c.columnCount}) ${c.getInt(0)}",
+                    Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
                 true
             }
             R.id.menu_export -> {   // currently disabled awaiting refactoring
+                //change this to backup/copy DB
                 val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
                     putExtra(Intent.EXTRA_TEXT, manyShots.toString())
@@ -106,11 +125,13 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_logs -> {
+                //val timenow = (Date().time/1000L).toInt()
+                //manyShots = theDAO.getRecentShots(timenow).toMutableList()
                 stashManyShots()
                 var outstr = "Shots: "
-                outstr += manyShots.size.toString() + "\n"
-                for (itm in manyShots)
-                    outstr += itm.toString() + "\n"
+                outstr += manyShots.size.toString() + " Curr/ " + theDAO.getNShots().toString() + " All\n"
+                //for (itm in manyShots)
+                //    outstr += itm.toString() + "\n"
                 findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
                     navigate(NavGraphDirections.actionGlobalLogsFragment(outstr))
                 true
@@ -138,6 +159,21 @@ class MainActivity : AppCompatActivity() {
         stashManyShots()
     }
 
+    override fun onStart() {
+        super.onStart()
+        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
+        with(appSharedpref1.edit()) {
+            putLong("tee_time", Date().time)
+            apply()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val c = theDB.query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(TRUNCATE)"))
+        if(c.moveToFirst())
+            c.getInt(0)
+    }
     private fun stashManyShots() {
         var outstr = ""
         for (itm in manyShots)

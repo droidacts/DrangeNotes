@@ -17,6 +17,7 @@
         <item>@string/default_stick_1</item>
     </string-array>
     <string-array name="default_golfers">
+        <item>who</item>
         <item>Myself</item>
         <item>others</item>
     </string-array>
