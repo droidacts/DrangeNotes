@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 class LogsFragment : Fragment() {
 
     val mViewmodel3: OneShotdataViewmodel by activityViewModels()
+    private val querylogs: QuerylogsViewmodel by viewModels()
     private val args: LogsFragmentArgs by navArgs()
 
     override fun onCreateView(

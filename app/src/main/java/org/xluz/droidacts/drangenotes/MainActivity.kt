@@ -1,8 +1,10 @@
 package org.xluz.droidacts.drangenotes
-
+/* Description comment block
+copyright, license, etc
+ */
+import android.app.Activity
 import android.os.Bundle
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,11 +18,12 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 import java.util.Date
+import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 
 private const val SETTINGKEY1 = "appSettings_use_meters"
 private const val LASTSESSIONLOG = "last_session_data"
+private const val LASTSESSIONLOG_T = "tee_time"
 private const val LASTSESSIONLOG_KEY1 = "last_shot"
 private const val LASTSESSIONLOG_KEYALL = "all_shots"
 
@@ -31,47 +34,38 @@ class MainActivity : AppCompatActivity() {
     private var manyShots = mutableListOf<Shotdata>()
     private lateinit var mainViewmodel: OneShotdataViewmodel
     lateinit var theDB: CCgolfDB
-    lateinit var theDAO: CCgolfDBDao
+//    lateinit var theDAO: CCgolfDBDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbar)
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        theDB = CCgolfDB.get(this)    // init the DB connection
+        mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
+
         manyShots.clear()   //making sure manyShots is accessed at least once and initialized
 
         binding.fab.setOnClickListener {
-
-            mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
             val singleshotv = mainViewmodel.singleShot.value
             if((singleshotv != null) && mainViewmodel.datrdy) {
                 singleshotv.settimeStamp()
                 manyShots.add(singleshotv)
-                val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, Context.MODE_PRIVATE)
-                with(appSharedpref1.edit()) {
-                    putString(LASTSESSIONLOG_KEY1, singleshotv.toString())
-                    apply()
-                }
-                mainViewmodel.logCurrShot()
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    theDAO.logOneshot(singleshotv)
-//                }
+                if(mainViewmodel.logCurrShot())
                 Snackbar.make(it, "Shot("+manyShots.size+") "+singleshotv.toString(), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+                    .setAction("Logging", null).show()
+                else
+                    Snackbar.make(it, "Not logged; invalidDB?", Snackbar.LENGTH_LONG)
+                        .setAction("Error!", null).show()
             } else
-                Snackbar.make(it, "No data.", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+                Snackbar.make(it, "No data.", Snackbar.LENGTH_LONG).show()
         }
 
-        theDB = CCgolfDB.get(this)
-        theDAO = theDB.theDAO()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -90,8 +84,8 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_about -> {
-                Snackbar.make(binding.root, "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+                Snackbar.make(binding.root, "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("More", null).show()
                 true
             }
             R.id.menu_settings -> {
@@ -105,33 +99,34 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
                 manyShots.clear()
-                val c = theDB.query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(TRUNCATE)"))
-                if(c.moveToFirst())
-                Snackbar.make(binding.root, "WAL checkpoint: (${c.columnCount}) ${c.getInt(0)}",
-                    Snackbar.LENGTH_LONG)
+                true
+            }
+            R.id.menu_export -> {
+                //change this to backup/copy DB
+                CoroutineScope(Dispatchers.IO).launch {
+                    val c = theDB.query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(TRUNCATE)"))
+                    if (c.moveToFirst())
+                        if (c.getInt(0) != 0) {
+                            val errmsg =
+                                "WAL checkpoint: (" + c.columnCount + ") " + c.getInt(0) + c.getInt(2)
+                            val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
+                            with(appSharedpref1.edit()) {
+                                putString(LASTSESSIONLOG_KEY1, errmsg)
+                                apply()
+                            }
+                        }
+                    // code to copy file to external SD
+                    DeveloperStuff.copyAppDataToLocal(parent, getString(R.string.app_name))
+                }
+                Snackbar.make(binding.root, "Copying app DB to external SD", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
                 true
             }
-            R.id.menu_export -> {   // currently disabled awaiting refactoring
-                //change this to backup/copy DB
-                val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, manyShots.toString())
-                }
-                val chooser = Intent.createChooser(
-                    exportAllCurrShotsReq, "Export current shots data"
-                )
-                startActivity(chooser)
-                true
-            }
             R.id.menu_logs -> {
-                //val timenow = (Date().time/1000L).toInt()
-                //manyShots = theDAO.getRecentShots(timenow).toMutableList()
                 stashManyShots()
-                var outstr = "Shots: "
-                outstr += manyShots.size.toString() + " Curr/ " + theDAO.getNShots().toString() + " All\n"
-                //for (itm in manyShots)
-                //    outstr += itm.toString() + "\n"
+                var outstr = "Shots: ${manyShots.size} Curr/ "
+                outstr += theDB.theDAO().getNShots().toString() + " All\n"
+
                 findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
                     navigate(NavGraphDirections.actionGlobalLogsFragment(outstr))
                 true
@@ -155,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString(LASTSESSIONLOG_KEYALL, manyShots.toString())
+//        outState.putString(LASTSESSIONLOG_KEYALL, manyShots.toString())
         stashManyShots()
     }
 
@@ -163,22 +158,16 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
         with(appSharedpref1.edit()) {
-            putLong("tee_time", Date().time)
+            putLong(LASTSESSIONLOG_T, Date().time)
             apply()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        val c = theDB.query(SimpleSQLiteQuery("PRAGMA wal_checkpoint(TRUNCATE)"))
-        if(c.moveToFirst())
-            c.getInt(0)
-    }
     private fun stashManyShots() {
         var outstr = ""
         for (itm in manyShots)
             outstr += itm.toString() + "\n"
-        // use to pass data among fragments
+        // mostly for debugging
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
         with(appSharedpref1.edit()) {
             putString(LASTSESSIONLOG_KEYALL, outstr)

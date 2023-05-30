@@ -34,15 +34,13 @@ class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : Vie
         singleShot.value = s.copy()
     }
 
-    fun logCurrShot() {
+    fun logCurrShot(): Boolean {
         val theDB = CCgolfDB.getOne()
+        if(theDB == null) return false
         viewModelScope.launch {
-            singleShot.value?.let {
-                if (theDB != null) {
-                    theDB.theDAO().logOneshot(it)
-                }
-            }
+            theDB.theDAO().logOneshot(singleShot.value!!)
         }
+        return true
     }
 
 }
