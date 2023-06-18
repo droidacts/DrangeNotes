@@ -8,7 +8,7 @@
     <string name="hello_first_fragment">Golfer</string>
     <string name="hello_second_fragment">Log the entry</string>
     <!-- -->
-    <string name="app_name">DrangeNotes</string>
+    <string name="app_name">Drange Logger</string>
     <string name="menu_item_settings">use meters</string>
     <string name="menu_item3">About</string>
     <string name="menu_item2">-\> logs</string>
@@ -47,6 +47,6 @@
     <string name="text_yds">yds</string>
     <string name="text_spaceholder1" />
     <string name="large_text">
-        "Not yet implemented. You may just exit and restart the app to clear.\n"
+        "Choose a player and recent option, then press Query to refresh logs.\n"
     </string>
 </resources>

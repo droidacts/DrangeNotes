@@ -21,4 +21,10 @@
         <item>Myself</item>
         <item>others</item>
     </string-array>
+    <string-array name="recent_choices">
+        <item>Last 20</item>
+        <item>Session</item>
+        <item>Today</item>
+        <item>ALL ?!</item>
+    </string-array>
 </resources>

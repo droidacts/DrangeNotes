@@ -30,10 +30,13 @@
         android:name="org.xluz.droidacts.drangenotes.LogsFragment"
         android:label="@string/logs_fragment_label"
         tools:layout="@layout/fragment_logs" >
-        <argument
-            android:name="msgtxt"
+        <argument android:name="msgtxt"
             app:argType="string"
             app:nullable="true" />
+        <argument android:name="sesscount"
+            app:argType="integer" />
+        <argument android:name="sessteetime"
+            app:argType="long" />
     </fragment>
     <action
         android:id="@+id/action_global_logsFragment"
