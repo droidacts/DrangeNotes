@@ -36,7 +36,7 @@ data class Shotdata(
         val dtformat = SimpleDateFormat("HH:mm")
         var outstr = dtformat.format(Date(1000L* datetime!!))
         outstr += " [$golfer] club $stick at $power >> $dist yds ($sshape)"
-        outstr += "{ " + comment + " ; " + loc + " }"
+        outstr += " { $comment ; $loc }"
         return outstr
     }
 }

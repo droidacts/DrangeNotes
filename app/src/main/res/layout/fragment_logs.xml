@@ -1,68 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".LogsFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <Spinner
-        android:id="@+id/players3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:entries="@array/default_golfers"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="localviewm"
+            type="org.xluz.droidacts.drangenotes.QuerylogsViewmodel" />
+    </data>
 
-    <Spinner
-        android:id="@+id/recentchoices"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:entries="@array/recent_choices"
-        app:layout_constraintStart_toEndOf="@+id/players3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/players3"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:context=".LogsFragment">
 
-        <TextView
-            android:id="@+id/allshotslogs"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/players3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:clickable="true"
-            android:text="@string/large_text" />
-    </androidx.core.widget.NestedScrollView>
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:entries="@array/default_golfers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infobar" />
 
-    <Button
-        android:id="@+id/exportButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="16dp"
-        android:text="Export"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+        <Spinner
+            android:id="@+id/recentchoices"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:entries="@array/recent_choices"
+            app:layout_constraintStart_toEndOf="@+id/players3"
+            app:layout_constraintTop_toTopOf="@+id/players3" />
 
-    <Button
-        android:id="@+id/queryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="Query"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/exportButton" />
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/players3"
+            tools:context=".LogsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/allshotslogs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:text="@{localviewm.vLogsText}" />
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/exportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/button_export_log"
+            app:layout_constraintStart_toEndOf="@+id/queryButton"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+        <Button
+            android:id="@+id/queryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/button_query_log"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/exportButton" />
+
+        <TextView
+            android:id="@+id/infobar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text='@{localviewm.vInfobarText}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

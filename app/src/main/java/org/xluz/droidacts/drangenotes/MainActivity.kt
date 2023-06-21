@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import java.util.Date
-import java.io.IOException
 import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 
 private const val SETTINGKEY1 = "appSettings_use_meters"
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 manyShots.clear()
                 true
             }
-            R.id.menu_export -> {    // backup copy DB to ext SD
+            R.id.menu_export -> {    // backup copy DB to media storage
                 if(neededPerms()) {
                     val DBf = this.getDatabasePath(CCgolfDB.DBfilename).toString()
                     if (CCgolfDB.copyAppDBtoSD())
@@ -121,12 +120,12 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_logs -> {
                 stashManyShots()
-                val outstr = "Shots: ${manyShots.size} session\n "
-                //outstr += theDB.theDAO().getNShots().toString() + " All\n"
-                val teetime = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE).getLong(LASTSESSIONLOG_T, 0)/1000L
+
+                val teetime = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE).getLong(LASTSESSIONLOG_T, 0)
+                val outstr = " ${manyShots.size} since ${Date(teetime).toString()} "
 
                 findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
-                    navigate(NavGraphDirections.actionGlobalLogsFragment(outstr, manyShots.size, teetime))
+                    navigate(NavGraphDirections.actionGlobalLogsFragment(outstr, manyShots.size, teetime/1000))
                 true
             }
             else -> {
@@ -148,23 +147,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        outState.putString(LASTSESSIONLOG_KEYALL, manyShots.toString())
         val sessAllshots = stashManyShots()
-        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
-        val teetime = appSharedpref1.getLong(LASTSESSIONLOG_T, 0)
-        try {
-            val outF = openFileOutput("log$teetime.log", MODE_APPEND)
-            outF.use {
-                it.writer().write("at"+Date().time.toString()+"\n")
-                it.writer().write(sessAllshots)
-                it.close()
-            }
-        } catch (e: IOException) {
-            with(appSharedpref1.edit()) {
-                putString(LASTSESSIONLOG_KEY1, "save session log file log$teetime failed")
-                apply()
-            }
-        }
+        outState.putString(LASTSESSIONLOG_KEYALL, sessAllshots)
+//        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
+//        val teetime = appSharedpref1.getLong(LASTSESSIONLOG_T, 0)
+//        try{  // not working!
+//            val outF = openFileOutput("log$teetime.log", MODE_APPEND)
+//            outF.use {
+//                it.writer().write("at "+Date().toString()+"\n")
+//                it.writer().write(sessAllshots)
+//                it.close()
+//            }
+//        } catch (e: IOException) {
+//            with(appSharedpref1.edit()) {
+//                putString(LASTSESSIONLOG_KEY1, "save session log file log$teetime failed")
+//                apply()
+//            }
+//        }
 
     }
 

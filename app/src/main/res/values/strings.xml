@@ -49,4 +49,6 @@
     <string name="large_text">
         "Choose a player and recent option, then press Query to refresh logs.\n"
     </string>
+    <string name="button_export_log">Export</string>
+    <string name="button_query_log">Query</string>
 </resources>

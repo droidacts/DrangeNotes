@@ -29,6 +29,8 @@ class LogsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLogsBinding.inflate(inflater, container, false)
+        // or, as noted in other sources of databinding ...
+        //_binding = DataBindingUtil.inflate(inflater, R.layout.fragment_logs, container, false)
         return binding.root
     }
 
@@ -38,14 +40,15 @@ class LogsFragment : Fragment() {
         mViewmodel3.datrdy = false
         querylogsViewmodel0.sessShotCount = args.sesscount
         querylogsViewmodel0.sessTeetime = args.sessteetime
+        querylogsViewmodel0.vInfobarText = args.msgtxt.toString()
         binding.exportButton.setOnClickListener {
             val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_TEXT, binding.allshotslogs.text)
-                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.logs_fragment_label))
+                putExtra(Intent.EXTRA_SUBJECT, getString(R.string.logs_fragment_label)+binding.infobar.text)
             }
             val chooser = Intent.createChooser(
-                exportAllCurrShotsReq, "Export current shots data"
+                exportAllCurrShotsReq, "Export current shots logs"
             )
             startActivity(chooser)
         }
@@ -53,25 +56,21 @@ class LogsFragment : Fragment() {
             querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
             querylogsViewmodel0.vRecentQuery = binding.recentchoices.selectedItemPosition
             querylogsViewmodel0.getlogs()
-            binding.allshotslogs.text = querylogsViewmodel0.vLogsText
         }
-        binding.allshotslogs.setOnFocusChangeListener {  //temporary use
-                _, hasFocus ->
-            if(hasFocus) {
-                binding.allshotslogs.text = querylogsViewmodel0.vLogsText
-            }
-        }
-        binding.allshotslogs.setOnClickListener {
-            //  temporary
-            binding.allshotslogs.text = querylogsViewmodel0.vLogsText
-        }
+// try data binding to textview, lifecycle owner is needed by LiveData
+        binding.localviewm = querylogsViewmodel0
+        binding.lifecycleOwner = viewLifecycleOwner
+        // not sure if we need this
+//        querylogsViewmodel0.vLogsText.observe(viewLifecycleOwner) {
+//            binding.allshotslogs.text = it
+//        }
+
 // set default logs to be all shots in current session
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 querylogsViewmodel0.vGolfer = 0
                 querylogsViewmodel0.vRecentQuery = 0
                 querylogsViewmodel0.getlogs()
-                binding.allshotslogs.text = "${args.msgtxt}\n${querylogsViewmodel0.vLogsText}"
             }
         }
     }
