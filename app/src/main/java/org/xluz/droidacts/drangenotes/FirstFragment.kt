@@ -26,7 +26,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -36,7 +36,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         mShotdata1 = mViewmodel.singleShot.value!!
-
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
         binding.playernames.onItemSelectedListener = this
         binding.sticklist.onItemSelectedListener = this
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId -> saveStateToViewmodel() }

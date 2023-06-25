@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -38,10 +39,11 @@ class LogsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mViewmodel3.datrdy = false
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.INVISIBLE
         querylogsViewmodel0.sessShotCount = args.sesscount
         querylogsViewmodel0.sessTeetime = args.sessteetime
         querylogsViewmodel0.vInfobarText = args.msgtxt.toString()
-        binding.exportButton.setOnClickListener {
+        binding.exportAbutton.setOnClickListener {
             val exportAllCurrShotsReq = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_TEXT, binding.allshotslogs.text)
@@ -52,10 +54,21 @@ class LogsFragment : Fragment() {
             )
             startActivity(chooser)
         }
-        binding.queryButton.setOnClickListener {
-            querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
-            querylogsViewmodel0.vRecentQuery = binding.recentchoices.selectedItemPosition
-            querylogsViewmodel0.getlogs()
+        binding.players3.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                goQueryLogs()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // no need
+            }
+        }
+        binding.recentchoices.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                goQueryLogs()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // no need
+            }
         }
 // try data binding to textview, lifecycle owner is needed by LiveData
         binding.localviewm = querylogsViewmodel0
@@ -74,6 +87,13 @@ class LogsFragment : Fragment() {
             }
         }
     }
+
+    private fun goQueryLogs() {
+        querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
+        querylogsViewmodel0.vRecentQuery = binding.recentchoices.selectedItemPosition
+        querylogsViewmodel0.getlogs()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
