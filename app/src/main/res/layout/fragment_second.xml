@@ -54,6 +54,7 @@
         app:rowCount="15">
 
         <TextView
+            android:id="@+id/ULcell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/holo_green_light"
@@ -101,6 +102,7 @@
             app:layout_row="0" />
 
         <TextView
+            android:id="@+id/URcell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
@@ -230,6 +232,7 @@
             app:layout_row="13" />
 
         <TextView
+            android:id="@+id/LLcell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_1"

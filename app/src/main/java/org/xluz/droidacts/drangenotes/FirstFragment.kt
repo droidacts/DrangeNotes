@@ -27,7 +27,6 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,11 +36,19 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
 
         mShotdata1 = mViewmodel.singleShot.value!!
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+
         binding.playernames.onItemSelectedListener = this
         binding.sticklist.onItemSelectedListener = this
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId -> saveStateToViewmodel() }
         binding.commentbox.addTextChangedListener { saveStateToViewmodel() }
         binding.DistanceYards.addTextChangedListener { saveStateToViewmodel() }
+        binding.DistanceYards.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) {
+                if(v is android.widget.EditText) {
+                    v.text.clear()
+                }
+            }
+        }
         binding.buttonFirst.setOnClickListener {
             saveStateToViewmodel()
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -72,23 +79,26 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
             saveStateToViewmodel()
         }
 
+    }
+
+    private fun restoreFrViewmodel() {
         // retrive last known selections
         // note the valid values of each field
         binding.commentbox.setText(mShotdata1.comment)
         mShotdata1.golfer?.let { binding.playernames.setSelection(it) } // 0, 1, ..
         binding.sticklist.setSelection(mShotdata1.stick - 1)    // 0..13; temp fix
         binding.radioGroup.clearCheck()
-        when(mShotdata1.power) {
+        when (mShotdata1.power) {
             1 -> binding.radioGroup.check(R.id.radioButton1)
             2 -> binding.radioGroup.check(R.id.radioButton2)
             3 -> binding.radioGroup.check(R.id.radioButton3)
             4 -> binding.radioGroup.check(R.id.radioButton4)
         }
-        if(mShotdata1.dist.toInt() > 0)
+        if (mShotdata1.dist.toInt() > 0)
             binding.DistanceYards.setText(mShotdata1.dist.toInt().toString())
         else
             binding.DistanceYards.setText("")
-        when(mShotdata1.sshape) {
+        when (mShotdata1.sshape) {
             0 -> {
                 binding.buttonTurnLeft.isChecked = false
                 binding.buttonTurnRight.isChecked = false
@@ -138,7 +148,6 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
                 binding.buttonMiss.isChecked = true
             }
         }
-
     }
 
     override fun onDestroyView() {
@@ -146,7 +155,12 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         _binding = null
     }
 
-    override fun onPause() {    //not sure this is needed
+    override fun onResume() {
+        super.onResume()
+        restoreFrViewmodel()
+    }
+
+    override fun onPause() {    //probably a failsafe
         super.onPause()
         saveStateToViewmodel()
     }
@@ -173,7 +187,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
 
         mViewmodel.singleShot.value = mShotdata1.copy()
         // Note that dist and stick are NOTNULL in DB
-        if(mShotdata1.dist > 0.0) mViewmodel.datrdy = true
+        mViewmodel.datrdy = mShotdata1.dist > 0.0
     }
 
     // Following 2 are implementing AdapterView.OnItemSelectedListener
