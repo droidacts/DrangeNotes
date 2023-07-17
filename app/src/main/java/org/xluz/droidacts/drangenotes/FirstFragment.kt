@@ -35,7 +35,16 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         mShotdata1 = mViewmodel.singleShot.value!!
-        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+
+/*
+        mViewmodel.singleShot.observe(viewLifecycleOwner, Observer {
+            if(mViewmodel.updatelog > 1) {
+                mShotdata1 = it
+                restoreFrViewmodel()
+                mViewmodel.updatelog = -1
+            }
+        })
+*/
 
         binding.playernames.onItemSelectedListener = this
         binding.sticklist.onItemSelectedListener = this
@@ -51,7 +60,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         }
         binding.buttonFirst.setOnClickListener {
             saveStateToViewmodel()
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_global_SecondFragment)
         }
         //The folllowing codes make a button group which only 1 of 3 buttons can be checked
         binding.buttonSt.setOnClickListener{
@@ -148,6 +157,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
                 binding.buttonMiss.isChecked = true
             }
         }
+
     }
 
     override fun onDestroyView() {
@@ -156,13 +166,14 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
     }
 
     override fun onResume() {
-        super.onResume()
         restoreFrViewmodel()
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
+        super.onResume()
     }
 
     override fun onPause() {    //probably a failsafe
-        super.onPause()
         saveStateToViewmodel()
+        super.onPause()
     }
 
     private fun saveStateToViewmodel() {
@@ -185,9 +196,10 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
             R.id.radioButton1 -> mShotdata1.power = 1
         }
 
-        mViewmodel.singleShot.value = mShotdata1.copy()
         // Note that dist and stick are NOTNULL in DB
         mViewmodel.datrdy = mShotdata1.dist > 0.0
+        mViewmodel.updatelog = 1
+        mViewmodel.singleShot.value = mShotdata1.copy()
     }
 
     // Following 2 are implementing AdapterView.OnItemSelectedListener

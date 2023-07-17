@@ -99,7 +99,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
-                manyShots.clear()
+                //
+                //manyShots.clear()
                 true
             }
             R.id.menu_export -> {    // backup copy DB to media storage
@@ -122,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                 stashManyShots()
 
                 val teetime = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE).getLong(LASTSESSIONLOG_T, 0)
-                val outstr = " ${manyShots.size} since ${Date(teetime).toString()} "
+                val outstr = " ${manyShots.size} since ${Date(teetime)} "
 
                 findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
                     navigate(NavGraphDirections.actionGlobalLogsFragment(outstr, manyShots.size, teetime/1000))

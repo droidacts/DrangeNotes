@@ -28,6 +28,7 @@ class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : Vie
         get() = savedStateHandle.get<Float>(currKey+"_dist") ?: 0.0f
         set(value) = savedStateHandle.set(currKey+"_dist", value)
     var datrdy: Boolean = false
+    var updatelog = -1    // viewmdel updated by anyone(0) 1stFrag(1) 2ndFrag(2) ...
 
     init {
         val s = Shotdata(vDist, vPower, vStick, 0, vGolfer, "", vComment)

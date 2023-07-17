@@ -282,7 +282,7 @@ class SecondFragment : Fragment() {
 
     private fun saveToViewmodel() {
         var ss = 0
-        if(binding.checkMiss.visibility == 0) {    // VISIBLE
+        if(binding.checkMiss.visibility == View.VISIBLE) {
             if(binding.checkSt.isChecked) ss = 1
             else if(binding.checkL.isChecked) ss = 2
             else if(binding.checkR.isChecked) ss = 3
@@ -295,14 +295,16 @@ class SecondFragment : Fragment() {
         }
         mShotdata1.sshape = ss
         mShotdata1.golfer = binding.playername2.selectedItemPosition
-        mViewmodel2.singleShot.value = mShotdata1.copy()
         mViewmodel2.datrdy = mShotdata1.dist > 0.0
+        mViewmodel2.updatelog = 2
+        mViewmodel2.singleShot.value = mShotdata1.copy()
     }
 
     override fun onResume() {
-        super.onResume()
+        activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
         clrAllEditboxes()
         restoreFrViewmodel()
+        super.onResume()
     }
 
     override fun onPause() {
