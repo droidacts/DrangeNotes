@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -54,6 +55,9 @@ class LogsFragment : Fragment() {
             )
             startActivity(chooser)
         }
+
+        val ada = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, querylogsViewmodel0.golfernames)
+        binding.players3.adapter = ada
         binding.players3.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 goQueryLogs()
@@ -89,7 +93,10 @@ class LogsFragment : Fragment() {
     }
 
     private fun goQueryLogs() {
-        querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
+        if(querylogsViewmodel0.golfernum != null)
+            querylogsViewmodel0.vGolfer = querylogsViewmodel0.golfernum[binding.players3.selectedItemPosition]
+        else    // a failsafe
+            querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
         querylogsViewmodel0.vRecentQuery = binding.recentchoices.selectedItemPosition
         querylogsViewmodel0.getlogs()
     }

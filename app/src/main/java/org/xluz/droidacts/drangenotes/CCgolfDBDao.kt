@@ -5,10 +5,10 @@ import androidx.room.*
 @Dao
 interface CCgolfDBDao {
     @Query("SELECT * FROM Golfers ORDER BY id")
-    suspend fun getGolfers(): List<Golferdata>
+    fun getGolfers(): List<Golferdata>
 
-    @Query("SELECT name FROM Golfers ORDER BY id")
-    fun getGolfersname(): List<String>
+    @Query("SELECT title FROM Sticks ORDER BY id LIMIT 14")
+    fun getSticksDefault(): List<String>
 
     @Insert
     suspend fun logOneshot(shot: Shotdata)

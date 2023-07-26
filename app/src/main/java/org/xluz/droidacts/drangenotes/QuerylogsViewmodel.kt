@@ -7,6 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class QuerylogsViewmodel : ViewModel() {
+    var golfernames: ArrayList<String> = arrayListOf()
+    var golfernum = arrayListOf<Int>()   // just diff syntax
+    var sticksnames = arrayOf<String>()
     var vRecentQuery: Int = 0
     var vGolfer: Int = 0    // =All/any
     var vLogsText: MutableLiveData<String> = MutableLiveData()
@@ -16,6 +19,20 @@ class QuerylogsViewmodel : ViewModel() {
 
     private val theDB = CCgolfDB.getOne()
 
+    init {
+        val golfers = theDB?.theDAO()?.getGolfers()
+        golfernum.clear()
+        golfernames.clear()
+        if (golfers != null) {
+            for (pn in golfers) {
+                golfernames.add(pn.name)
+                golfernum.add(pn.id)
+            }
+        }
+        theDB?.theDAO()?.getSticksDefault()?.let {
+            if(it.isNotEmpty()) sticksnames = it.toTypedArray()
+        }
+     }
     fun getlogs() {
         viewModelScope.launch(Dispatchers.IO) {
             when(vRecentQuery) {
@@ -53,9 +70,13 @@ class QuerylogsViewmodel : ViewModel() {
     private fun convShotsqueryToStr(shotsquery: List<Shotdata>?): String {
         var tmpstr: String
         if(shotsquery != null) {
-            tmpstr = "Query $vGolfer,$vRecentQuery: ${shotsquery.size} \n"
-            for (ss in shotsquery)
-                tmpstr += ss.toString() + "\n"
+            tmpstr = "Query: ${shotsquery.size} \n"
+            for (ss in shotsquery) {
+                //tmpstr += ss.toString() + "\n"
+                tmpstr += golfernames[ss.golfer?: 0]
+                tmpstr += " [" + sticksnames[ss.stick-1] + "] "
+                tmpstr += "at ${ss.power} >> ${ss.dist} (${ss.sshape}) { ${ss.comment} }\n"
+            }
         } else {
             tmpstr = "No result"
         }
