@@ -33,7 +33,7 @@
     <string name="default_stick_5">4i</string>
     <string name="default_stick_4">3H</string>
     <string name="default_stick_3">2H</string>
-    <string name="default_stick_2">2W/3W</string>
+    <string name="default_stick_2">2/3W</string>
     <string name="default_stick_1">Driver</string>
     <string name="action_text_record">Record</string>
     <string name="button_straight_0">Straight</string>

@@ -73,7 +73,13 @@ class QuerylogsViewmodel : ViewModel() {
             tmpstr = "Query: ${shotsquery.size} \n"
             for (ss in shotsquery) {
                 //tmpstr += ss.toString() + "\n"
-                tmpstr += golfernames[ss.golfer?: 0]
+                //tmpstr += golfernames[ss.golfer?: 0]  //not quite right, need inner join
+                for(j in 0..golfernum.size-1) {
+                    if(ss.golfer == golfernum[j]) {
+                        tmpstr += golfernames[j]
+                        break
+                    }
+                }
                 tmpstr += " [" + sticksnames[ss.stick-1] + "] "
                 tmpstr += "at ${ss.power} >> ${ss.dist} (${ss.sshape}) { ${ss.comment} }\n"
             }

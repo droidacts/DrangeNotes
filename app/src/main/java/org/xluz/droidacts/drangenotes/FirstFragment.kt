@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -45,6 +46,12 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
             }
         })
 */
+        val ada = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            mViewmodel.golfername)
+        ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.playernames.adapter = ada
 
         binding.playernames.onItemSelectedListener = this
         binding.sticklist.onItemSelectedListener = this
@@ -166,6 +173,19 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
     }
 
     override fun onResume() {
+//        if (mViewmodel.golfername.size < 1) {
+//            mViewmodel.loadGolfernames()
+//            if (mViewmodel.golfername.size > 0) {
+//                val ada = ArrayAdapter(requireContext(),
+//                    android.R.layout.simple_spinner_item,
+//                    mViewmodel.golfername
+//                )
+//                ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//                binding.playernames.adapter = ada
+//                //binding.playernames.setSelection(0)
+//                binding.playernames.invalidate()
+//            }
+//        }
         restoreFrViewmodel()
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
         super.onResume()

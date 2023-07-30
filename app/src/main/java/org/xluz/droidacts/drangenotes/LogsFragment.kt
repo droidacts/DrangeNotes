@@ -57,7 +57,9 @@ class LogsFragment : Fragment() {
         }
 
         val ada = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, querylogsViewmodel0.golfernames)
+        ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.players3.adapter = ada
+        binding.players3.setSelection(0)
         binding.players3.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 goQueryLogs()
@@ -93,10 +95,7 @@ class LogsFragment : Fragment() {
     }
 
     private fun goQueryLogs() {
-        if(querylogsViewmodel0.golfernum != null)
-            querylogsViewmodel0.vGolfer = querylogsViewmodel0.golfernum[binding.players3.selectedItemPosition]
-        else    // a failsafe
-            querylogsViewmodel0.vGolfer = binding.players3.selectedItemPosition
+        querylogsViewmodel0.vGolfer = querylogsViewmodel0.golfernum[binding.players3.selectedItemPosition]
         querylogsViewmodel0.vRecentQuery = binding.recentchoices.selectedItemPosition
         querylogsViewmodel0.getlogs()
     }

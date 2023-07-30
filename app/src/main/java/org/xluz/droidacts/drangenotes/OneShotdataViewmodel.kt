@@ -11,8 +11,10 @@ private const val currKey = "last_shot"
 class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     val singleShot = MutableLiveData<Shotdata>()
+    var golfername = arrayListOf<String>()
+    var golfersn = arrayListOf<Int>()
 
-    var vGolfer: Int
+    var vGolfer: Int      // selected item position in a spinner
         get() = savedStateHandle.get<Int>(currKey+"_golfer") ?: 0
         set(value) = savedStateHandle.set(currKey+"_golfer", value)
     var vStick: Int
@@ -33,13 +35,30 @@ class OneShotdataViewmodel(private val savedStateHandle: SavedStateHandle) : Vie
     init {
         val s = Shotdata(vDist, vPower, vStick, 0, vGolfer, "", vComment)
         singleShot.value = s.copy()
+        loadGolfernames()
+    }
+
+    fun loadGolfernames(): Int {
+        val theDB = CCgolfDB.getOne()
+        val golfers = theDB?.theDAO()?.getGolfers()
+        golfersn.clear()
+        golfername.clear()
+        golfers?.run {
+            for (itm in this) {
+                golfername.add(itm.name)
+                golfersn.add(itm.id)
+            }
+        }
+        return golfername.size
     }
 
     fun logCurrShot(): Boolean {
         val theDB = CCgolfDB.getOne()
         if(theDB == null) return false
+        val currShot: Shotdata = singleShot.value!!
+        currShot.golfer?.let { currShot.golfer = golfersn[it] }
         viewModelScope.launch {
-            theDB.theDAO().logOneshot(singleShot.value!!)
+            theDB.theDAO().logOneshot(currShot)
         }
         return true
     }

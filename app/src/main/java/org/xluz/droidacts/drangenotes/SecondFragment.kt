@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
@@ -147,6 +148,10 @@ class SecondFragment : Fragment() {
             mShotdata1.comment = binding.commentboxLong.text.toString()
             saveToViewmodel()
         }
+        val ada = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, mViewmodel2.golfername)
+        ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.playername2.adapter = ada
+        binding.playername2.setSelection(0)
     }
 
     private fun restoreFrViewmodel() {
