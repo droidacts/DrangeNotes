@@ -27,5 +27,6 @@ interface CCgolfDBDao {
     suspend fun getRecentdayShots(timenow: Long): List<Shotdata>
     @Query("SELECT * from Shots WHERE (golfer=:player) and (datetime BETWEEN :timenow-86400 AND :timenow) ORDER BY datetime")
     suspend fun getRecentdayShotsBy(timenow: Long, player: Int): List<Shotdata>
-
+    @Query("SELECT * from Shots WHERE (golfer=:player) and (datetime > :ttime) ORDER BY datetime DESC LIMIT :n")
+    suspend fun getLastNShotsBySince(n: Int, player: Int, ttime: Long,): List<Shotdata>
 }

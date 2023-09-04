@@ -691,7 +691,6 @@
             style="@style/TextInputB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/text_yds"
             android:importantForAutofill="no"
             android:inputType="number"
             app:layout_column="4"

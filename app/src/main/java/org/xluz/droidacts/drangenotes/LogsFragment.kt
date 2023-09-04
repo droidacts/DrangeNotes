@@ -9,7 +9,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -20,7 +19,7 @@ import org.xluz.droidacts.drangenotes.databinding.FragmentLogsBinding
 class LogsFragment : Fragment() {
 
     private val mViewmodel3: OneShotdataViewmodel by activityViewModels()
-    private val querylogsViewmodel0: QuerylogsViewmodel by viewModels()
+    private val querylogsViewmodel0: QuerylogsViewmodel by activityViewModels()
     private val args: LogsFragmentArgs by navArgs()
     private var _binding: FragmentLogsBinding? = null
     private val binding get() = _binding!!
@@ -88,7 +87,7 @@ class LogsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 querylogsViewmodel0.vGolfer = 0
-                querylogsViewmodel0.vRecentQuery = 0
+                querylogsViewmodel0.vRecentQuery = 1
                 querylogsViewmodel0.getlogs()
             }
         }

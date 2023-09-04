@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.core.view.children
@@ -19,6 +20,7 @@ import org.xluz.droidacts.drangenotes.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     val mViewmodel2: OneShotdataViewmodel by activityViewModels()
+    val currShots: QuerylogsViewmodel by activityViewModels()
     private var mShotdata1 = Shotdata()
 
     private var _binding: FragmentSecondBinding? = null
@@ -152,6 +154,15 @@ class SecondFragment : Fragment() {
         ada.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.playername2.adapter = ada
         binding.playername2.setSelection(0)
+        binding.playername2.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                saveToViewmodel()
+                loadtoNotesGrid()
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // no need
+            }
+        }
     }
 
     private fun restoreFrViewmodel() {
@@ -274,12 +285,14 @@ class SecondFragment : Fragment() {
 
         mShotdata1.golfer?.let { binding.playername2.setSelection(it) }
         binding.commentboxLong.setText(mShotdata1.comment)
+        mShotdata1.golfer?.let { currShots.vGolfer = it }
     }
 
     private fun clrAllEditboxes() {
         val allEditboxes = binding.gridLayout.children.filter { it is EditText }
         for (v in allEditboxes) {
             if (v is EditText) {
+                v.hint = ""
                 v.text.clear()
             }
         }
@@ -305,9 +318,72 @@ class SecondFragment : Fragment() {
         mViewmodel2.singleShot.value = mShotdata1.copy()
     }
 
+    private fun loadtoNotesGrid() {
+        clrAllEditboxes()
+        if (currShots.shots.isNotEmpty()) {
+            for (ss in currShots.shots) {
+                if (mShotdata1.golfer == 0 || ss.golfer == mShotdata1.golfer)
+                    if (ss.power == 4) {       // 100%
+                        when (ss.stick) {
+                            1 -> binding.cell11.hint = ss.dist.toInt().toString()
+                            2 -> binding.cell12.hint = ss.dist.toInt().toString()
+                            3 -> binding.cell13.hint = ss.dist.toInt().toString()
+                            4 -> binding.cell14.hint = ss.dist.toInt().toString()
+                            5 -> binding.cell15.hint = ss.dist.toInt().toString()
+                            6 -> binding.cell16.hint = ss.dist.toInt().toString()
+                            7 -> binding.cell17.hint = ss.dist.toInt().toString()
+                            8 -> binding.cell18.hint = ss.dist.toInt().toString()
+                            9 -> binding.cell19.hint = ss.dist.toInt().toString()
+                            10 -> binding.cell1A.hint = ss.dist.toInt().toString()
+                            11 -> binding.cell1B.hint = ss.dist.toInt().toString()
+                            12 -> binding.cell1C.hint = ss.dist.toInt().toString()
+                            13 -> binding.cell1D.hint = ss.dist.toInt().toString()
+                            14 -> binding.cell1E.hint = ss.dist.toInt().toString()
+                        }
+                    } else if (ss.power == 3) {  // 3/4
+                        when (ss.stick) {
+                            1 -> binding.cell21.hint = ss.dist.toInt().toString()
+                            2 -> binding.cell22.hint = ss.dist.toInt().toString()
+                            3 -> binding.cell23.hint = ss.dist.toInt().toString()
+                            4 -> binding.cell24.hint = ss.dist.toInt().toString()
+                            5 -> binding.cell25.hint = ss.dist.toInt().toString()
+                            6 -> binding.cell26.hint = ss.dist.toInt().toString()
+                            7 -> binding.cell27.hint = ss.dist.toInt().toString()
+                            8 -> binding.cell28.hint = ss.dist.toInt().toString()
+                            9 -> binding.cell29.hint = ss.dist.toInt().toString()
+                            10 -> binding.cell2A.hint = ss.dist.toInt().toString()
+                            11 -> binding.cell2B.hint = ss.dist.toInt().toString()
+                            12 -> binding.cell2C.hint = ss.dist.toInt().toString()
+                            13 -> binding.cell2D.hint = ss.dist.toInt().toString()
+                            14 -> binding.cell2E.hint = ss.dist.toInt().toString()
+                        }
+                    } else if (ss.power == 2) {  // 1/2
+                        when (ss.stick) {
+                            1 -> binding.cell31.hint = ss.dist.toInt().toString()
+                            2 -> binding.cell32.hint = ss.dist.toInt().toString()
+                            3 -> binding.cell33.hint = ss.dist.toInt().toString()
+                            4 -> binding.cell34.hint = ss.dist.toInt().toString()
+                            5 -> binding.cell35.hint = ss.dist.toInt().toString()
+                            6 -> binding.cell36.hint = ss.dist.toInt().toString()
+                            7 -> binding.cell37.hint = ss.dist.toInt().toString()
+                            8 -> binding.cell38.hint = ss.dist.toInt().toString()
+                            9 -> binding.cell39.hint = ss.dist.toInt().toString()
+                        }
+                    } else if (ss.power == 1) {  // chip
+                        when (ss.stick) {
+                            1 -> binding.cell41.hint = ss.dist.toInt().toString()
+                            2 -> binding.cell42.hint = ss.dist.toInt().toString()
+                            3 -> binding.cell43.hint = ss.dist.toInt().toString()
+                            4 -> binding.cell44.hint = ss.dist.toInt().toString()
+                        }
+                    }
+            }
+        }
+    }
     override fun onResume() {
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
-        clrAllEditboxes()
+        //clrAllEditboxes()
+        loadtoNotesGrid()
         restoreFrViewmodel()
         super.onResume()
     }

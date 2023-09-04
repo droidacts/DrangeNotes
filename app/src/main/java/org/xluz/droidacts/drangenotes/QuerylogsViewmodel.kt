@@ -7,11 +7,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class QuerylogsViewmodel : ViewModel() {
+    var shots: ArrayList<Shotdata> = arrayListOf()
     var golfernames: ArrayList<String> = arrayListOf()
-    var golfernum = arrayListOf<Int>()   // just diff syntax
+    var golfernum = arrayListOf<Int>()                // alt syntax
     var sticksnames = arrayOf<String>()
     var vRecentQuery: Int = 0
-    var vGolfer: Int = 0    // =All/any
+    var vGolfer: Int = 0    // =NA/any
     var vLogsText: MutableLiveData<String> = MutableLiveData()
     var sessShotCount: Int? = null
     var sessTeetime: Long? = 0    //unix time in seconds
@@ -48,14 +49,14 @@ class QuerylogsViewmodel : ViewModel() {
                             if(vGolfer==0)
                                 convShotsqueryToStr(theDB?.theDAO()?.getLastNShots(sessShotCount ?: 20))
                             else
-                                convShotsqueryToStr(theDB?.theDAO()?.getLastNShotsBy(sessShotCount ?: 20, vGolfer))
+                                convShotsqueryToStr(theDB?.theDAO()?.getLastNShotsBySince(sessShotCount ?: 20, vGolfer, sessTeetime ?: 0))
                         }
                     }
                 }
                 2 -> {
-                    val Tnow = java.util.Date().time / 1000
-                    if(vGolfer==0) convShotsqueryToStr(theDB?.theDAO()?.getRecentdayShots(Tnow))
-                    else convShotsqueryToStr(theDB?.theDAO()?.getRecentdayShotsBy(Tnow, vGolfer))
+                    val currT = java.util.Date().time / 1000
+                    if(vGolfer==0) convShotsqueryToStr(theDB?.theDAO()?.getRecentdayShots(currT))
+                    else convShotsqueryToStr(theDB?.theDAO()?.getRecentdayShotsBy(currT, vGolfer))
                 }
                 3 -> {
                     if(vGolfer==0) convShotsqueryToStr(theDB?.theDAO()?.getALLShots())
@@ -72,9 +73,7 @@ class QuerylogsViewmodel : ViewModel() {
         if(shotsquery != null) {
             tmpstr = "Query: ${shotsquery.size} \n"
             for (ss in shotsquery) {
-                //tmpstr += ss.toString() + "\n"
-                //tmpstr += golfernames[ss.golfer?: 0]  //not quite right, need inner join
-                for(j in 0..golfernum.size-1) {
+                for(j in 0..(golfernum.size - 1)) {
                     if(ss.golfer == golfernum[j]) {
                         tmpstr += golfernames[j]
                         break

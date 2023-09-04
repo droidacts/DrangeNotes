@@ -61,6 +61,7 @@
             android:background="@android:color/holo_green_light"
             android:ems="4"
             android:text="@string/text_yards"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
@@ -431,7 +432,7 @@
             app:layout_row="3" />
 
         <EditText
-            android:id="@+id/celll24"
+            android:id="@+id/cell24"
             style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -688,7 +689,6 @@
             style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/text_yds"
             android:importantForAutofill="no"
             android:inputType="number"
             app:layout_column="4"

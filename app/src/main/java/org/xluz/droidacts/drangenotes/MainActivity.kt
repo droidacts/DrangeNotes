@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewmodel: OneShotdataViewmodel
     private lateinit var theDB: CCgolfDB
-    private var manyShots = mutableListOf<Shotdata>()
+
+    val manyShots: QuerylogsViewmodel by viewModels()    // should be scoped to this Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +43,8 @@ class MainActivity : AppCompatActivity() {
         theDB = CCgolfDB.get(this)    // init the DB connection
         mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
         if(mainViewmodel.golfername.isEmpty()) mainViewmodel.loadGolfernames()
-        manyShots.clear()   //making sure manyShots is accessed at least once and initialized
+        if(manyShots.sticksnames.isEmpty())
+            manyShots.sticksnames = resources.getStringArray(R.array.default_sticknames)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -54,10 +57,10 @@ class MainActivity : AppCompatActivity() {
             val singleshotv = mainViewmodel.singleShot.value
             if ((singleshotv != null) && mainViewmodel.datrdy) {
                 singleshotv.settimeStamp()
-                manyShots.add(singleshotv)
+                manyShots.shots.add(singleshotv)
                 if(mainViewmodel.logCurrShot())
                     Snackbar.make(it,
-                        "Shot(" + manyShots.size + ") " + singleshotv.toString(), Snackbar.LENGTH_LONG)
+                        "Shot(" + manyShots.shots.size + ") " + singleshotv.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Logging", null).show()
                 else
                     Snackbar.make(it, "Not logged; invalid DB?", Snackbar.LENGTH_LONG)
@@ -85,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu_about -> {
                 Snackbar.make(binding.root,
-                    "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_INDEFINITE)
+                    "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_LONG)
                     .setAction("More", null).show()
                 true
             }
@@ -100,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
                 //
-                //manyShots.clear()
                 true
             }
             R.id.menu_export -> {    // backup copy DB to media storage
@@ -109,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                     if (CCgolfDB.copyAppDBtoSD())
                         Snackbar.make(
                             binding.root,
-                            "$DBf to media storage", Snackbar.LENGTH_LONG
+                            "$DBf to media storage", Snackbar.LENGTH_INDEFINITE
                         ).show()
                     else
                         Snackbar.make(
@@ -123,10 +125,10 @@ class MainActivity : AppCompatActivity() {
                 stashManyShots()
 
                 val teetime = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE).getLong(LASTSESSIONLOG_T, 0)
-                val outstr = " ${manyShots.size} since ${Date(teetime)} "
+                val outstr = " ${manyShots.shots.size} since ${Date(teetime*1000)} "
 
                 findNavController(R.id.nav_host_fragment_content_main).  //.navigate(R.id.logsFragment)
-                    navigate(NavGraphDirections.actionGlobalLogsFragment(outstr, manyShots.size, teetime/1000))
+                    navigate(NavGraphDirections.actionGlobalLogsFragment(outstr, manyShots.shots.size, teetime))
                 true
             }
             else -> {
@@ -150,36 +152,24 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
         val sessAllshots = stashManyShots()
         outState.putString(LASTSESSIONLOG_KEYALL, sessAllshots)
-//        val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
-//        val teetime = appSharedpref1.getLong(LASTSESSIONLOG_T, 0)
-//        try{  // not working!
-//            val outF = openFileOutput("log$teetime.log", MODE_APPEND)
-//            outF.use {
-//                it.writer().write("at "+Date().toString()+"\n")
-//                it.writer().write(sessAllshots)
-//                it.close()
-//            }
-//        } catch (e: IOException) {
-//            with(appSharedpref1.edit()) {
-//                putString(LASTSESSIONLOG_KEY1, "save session log file log$teetime failed")
-//                apply()
-//            }
-//        }
-
     }
 
     override fun onStart() {
         super.onStart()
+        manyShots.shots.clear()
+        //manyShots.sessShotCount = 0
+        val teetime0 = Date().time / 1000
+        manyShots.sessTeetime = teetime0
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
         with(appSharedpref1.edit()) {
-            putLong(LASTSESSIONLOG_T, Date().time)
+            putLong(LASTSESSIONLOG_T, teetime0)
             apply()
         }
     }
 
     private fun stashManyShots() : String {
         var outstr = ""
-        for (itm in manyShots)
+        for (itm in manyShots.shots)
             outstr += itm.toString() + "\n"
         // mostly for debugging
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
@@ -194,11 +184,8 @@ class MainActivity : AppCompatActivity() {
         val p = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if(p != PackageManager.PERMISSION_GRANTED) {
             // ask for perm at runtime
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                99
-            )
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 99)
             return false
         }
         return true
