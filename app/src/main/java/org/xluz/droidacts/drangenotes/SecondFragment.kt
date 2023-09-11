@@ -19,8 +19,8 @@ import org.xluz.droidacts.drangenotes.databinding.FragmentSecondBinding
  */
 class SecondFragment : Fragment() {
 
-    val mViewmodel2: OneShotdataViewmodel by activityViewModels()
-    val currShots: QuerylogsViewmodel by activityViewModels()
+    private val mViewmodel2: OneShotdataViewmodel by activityViewModels()
+    private val currShots: QuerylogsViewmodel by activityViewModels()
     private var mShotdata1 = Shotdata()
 
     private var _binding: FragmentSecondBinding? = null

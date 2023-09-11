@@ -73,7 +73,7 @@ class QuerylogsViewmodel : ViewModel() {
         if(shotsquery != null) {
             tmpstr = "Query: ${shotsquery.size} \n"
             for (ss in shotsquery) {
-                for(j in 0..(golfernum.size - 1)) {
+                for(j in 0 until golfernum.size) {
                     if(ss.golfer == golfernum[j]) {
                         tmpstr += golfernames[j]
                         break

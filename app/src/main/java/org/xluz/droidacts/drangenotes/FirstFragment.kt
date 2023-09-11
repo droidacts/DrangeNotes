@@ -19,7 +19,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentFirstBinding? = null
     private var mShotdata1 = Shotdata()
-    val mViewmodel: OneShotdataViewmodel by activityViewModels()
+    private val mViewmodel: OneShotdataViewmodel by activityViewModels()
 
     // This property is only valid between onCreateView and onDestroyView
     private val binding get() = _binding!!

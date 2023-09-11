@@ -1,6 +1,6 @@
 package org.xluz.droidacts.drangenotes
 /* Description comment block
-copyright, license, etc
+copyright(C) 2023 by Cecil Cheung, PhD
  */
 
 import android.Manifest
@@ -25,7 +25,7 @@ import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 private const val SETTINGKEY1 = "appSettings_use_meters"
 private const val LASTSESSIONLOG = "last_session_data"
 private const val LASTSESSIONLOG_T = "tee_time"
-private const val LASTSESSIONLOG_KEY1 = "infoLog"
+//private const val LASTSESSIONLOG_KEY1 = "infoLog"
 private const val LASTSESSIONLOG_KEYALL = "all_shots"
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewmodel: OneShotdataViewmodel
     private lateinit var theDB: CCgolfDB
-
-    val manyShots: QuerylogsViewmodel by viewModels()    // should be scoped to this Activity
+    private val manyShots: QuerylogsViewmodel by viewModels()    // should be scoped to this Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         if(mainViewmodel.golfername.isEmpty()) mainViewmodel.loadGolfernames()
         if(manyShots.sticksnames.isEmpty())
             manyShots.sticksnames = resources.getStringArray(R.array.default_sticknames)
+        clrManyShots()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_clearlogs -> {   // currently disabled, should use alertdialog to confirm?
-                //
+                clrManyShots()
                 true
             }
             R.id.menu_export -> {    // backup copy DB to media storage
@@ -154,8 +154,7 @@ class MainActivity : AppCompatActivity() {
         outState.putString(LASTSESSIONLOG_KEYALL, sessAllshots)
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun clrManyShots() : Long {
         manyShots.shots.clear()
         //manyShots.sessShotCount = 0
         val teetime0 = Date().time / 1000
@@ -165,6 +164,7 @@ class MainActivity : AppCompatActivity() {
             putLong(LASTSESSIONLOG_T, teetime0)
             apply()
         }
+        return teetime0
     }
 
     private fun stashManyShots() : String {
