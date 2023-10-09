@@ -1,6 +1,9 @@
 package org.xluz.droidacts.drangenotes
-/* Description comment block
-copyright(C) 2023 by Cecil Cheung, PhD
+/* An Android app to record shots distances during driving range practice
+Copyright(C) 2023 by Cecil Cheung PhD
+
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
  */
 
 import android.Manifest
@@ -15,6 +18,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -87,9 +91,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_about -> {
+/*
                 Snackbar.make(binding.root,
                     "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_LONG)
                     .setAction("More", null).show()
+*/
+                Toast.makeText(this,
+                    "Ver "+BuildConfig.VERSION_NAME+" by CC\npublish under GPL v3",
+                    Toast.LENGTH_LONG).show()
                 true
             }
             R.id.menu_settings -> {

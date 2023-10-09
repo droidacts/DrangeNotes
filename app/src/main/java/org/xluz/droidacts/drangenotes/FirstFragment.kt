@@ -1,4 +1,11 @@
 package org.xluz.droidacts.drangenotes
+/**
+An Android app to record shots distances during driving range practice
+Copyright(C) 2023 by Cecil Cheung PhD
+
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
+ */
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,9 +19,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.xluz.droidacts.drangenotes.databinding.FragmentFirstBinding
 
-/** need a copyright and GPL notice here
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
 
     private var _binding: FragmentFirstBinding? = null

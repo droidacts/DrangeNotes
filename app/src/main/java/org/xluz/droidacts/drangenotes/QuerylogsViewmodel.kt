@@ -1,4 +1,11 @@
 package org.xluz.droidacts.drangenotes
+/**
+Data class to hold values of the UI elements of various fragments/activity
+Copyright(C) 2023 by Cecil Cheung PhD
+
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
+ */
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
