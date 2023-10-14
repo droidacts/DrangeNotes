@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Bags` (
 FOREIGN KEY(`s01`) REFERENCES `Sticks`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , 
 FOREIGN KEY(`golfer`) REFERENCES `Golfers`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION 
 );
-INSERT INTO "Golfers" ("id","name","info") VALUES (0,'Myself','Defaultee');
+INSERT INTO "Golfers" ("id","name","info") VALUES (0,'who','Defaultee');
 INSERT INTO "Golfers" ("id","name","info") VALUES (1,'CC','The originator');
 INSERT INTO "Golfers" ("id","name","info") VALUES (2,'BB','Tester');
 INSERT INTO "Golfers" ("id","name","info") VALUES (3,'others',NULL);
@@ -58,7 +58,7 @@ INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (9,'5i','generic',NULL
 INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (10,'4i','generic',NULL);
 INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (11,'3H','generic',NULL);
 INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (12,'2H','generic',NULL);
-INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (13,'2W/3W','generic',NULL);
+INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (13,'3/5W','generic',NULL);
 INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (14,'Driver','generic',NULL);
 INSERT INTO "Sticks" ("id","title","desc","specs") VALUES (15,'Putt','generic',NULL);
 INSERT INTO "Plvl" ("idx","desc") VALUES (0,'any');

@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("More", null).show()
 */
                 Toast.makeText(this,
-                    "Ver "+BuildConfig.VERSION_NAME+" by CC\npublish under GPL v3",
+                    "Ver "+BuildConfig.VERSION_NAME+" Copyright by CC\nDistribute under GPL v3",
                     Toast.LENGTH_LONG).show()
                 true
             }
