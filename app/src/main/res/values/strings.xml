@@ -8,7 +8,7 @@
     <string name="hello_first_fragment">Golfer</string>
     <string name="hello_second_fragment">Log the entry</string>
     <!-- -->
-    <string name="app_name">Drange Logger</string>
+    <string name="app_name">Drange Logs</string>
     <string name="menu_item_settings">use meters</string>
     <string name="menu_item3">About</string>
     <string name="menu_item2">-\> logs</string>
