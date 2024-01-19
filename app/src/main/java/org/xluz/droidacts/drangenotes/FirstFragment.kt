@@ -8,6 +8,7 @@ See www.gnu.org/licenses/gpl-3.0.html
  */
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -69,10 +70,10 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
                 }
             }
         }
-        binding.buttonFirst.setOnClickListener {
-            saveStateToViewmodel()
-            findNavController().navigate(R.id.action_global_SecondFragment)
-        }
+//        binding.buttonFirst.setOnClickListener {
+//            saveStateToViewmodel()
+//            findNavController().navigate(R.id.action_global_SecondFragment)
+//        }
         //The folllowing codes make a button group which only 1 of 3 buttons can be checked
         binding.buttonSt.setOnClickListener{
             if(binding.buttonSt.isChecked) {
