@@ -1,5 +1,11 @@
 package org.xluz.droidacts.drangenotes
+/**
+Definition of the app database
+Copyright(C) 2024 by Cecil Cheung PhD
 
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
+ */
 import android.content.Context
 import android.os.Environment
 import androidx.room.Database
@@ -59,7 +65,7 @@ abstract class CCgolfDB : RoomDatabase() {
             return retv
         }
 
-        fun copyAppDBtoSD(): Boolean {
+        fun copyAppDBtoSD(): Boolean {  //may not work in SDK 33+
             val outdir = Environment.getExternalStoragePublicDirectory("backup").absolutePath
             val infile = DBfullpath
                 ?: File("/data/data/org.xluz.droidacts.drangenotes/databases/" + DBfilename)

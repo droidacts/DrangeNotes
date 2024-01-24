@@ -1,6 +1,6 @@
 package org.xluz.droidacts.drangenotes
 /* An Android app to record shots distances during driving range practice
-Copyright(C) 2023 by Cecil Cheung PhD
+Copyright(C) 2024 by Cecil Cheung PhD
 
 This source code file is released under GNU General Public License version 3.
 See www.gnu.org/licenses/gpl-3.0.html
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener {
+            mainViewmodel.packShotdata()
             val singleshotv = mainViewmodel.singleShot.value
             if ((singleshotv != null) && mainViewmodel.datrdy) {
                 singleshotv.settimeStamp()
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                         .setAction("Error!", null).show()
             } else
                 Snackbar.make(it, "Nothing to log.", Snackbar.LENGTH_LONG).show()
+            mainViewmodel.datrdy = false
         }
 
     }
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     .setAction("More", null).show()
 */
                 Toast.makeText(this,
-                    "Ver "+BuildConfig.VERSION_NAME+" Copyright by CC\nDistribute under GPL v3",
+                    "Ver "+BuildConfig.VERSION_NAME+" Copyright 2024 by CC\nDistribute under GPL v3",
                     Toast.LENGTH_LONG).show()
                 true
             }
@@ -120,12 +122,12 @@ class MainActivity : AppCompatActivity() {
                     if (CCgolfDB.copyAppDBtoSD())
                         Snackbar.make(
                             binding.root,
-                            "$DBf to media storage", Snackbar.LENGTH_INDEFINITE
+                            "$DBf to media storage\nSwipe to dismiss", Snackbar.LENGTH_INDEFINITE
                         ).show()
                     else
                         Snackbar.make(
                             binding.root,
-                            "$DBf export copy failed", Snackbar.LENGTH_INDEFINITE
+                            "$DBf export copy failed!\nSwipe to dismiss", Snackbar.LENGTH_INDEFINITE
                         ).show()
                 }
                 true
@@ -190,6 +192,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun neededPerms() : Boolean {
+    // won't work for SDK33 and beyond
         val p = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if(p != PackageManager.PERMISSION_GRANTED) {
             // ask for perm at runtime

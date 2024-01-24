@@ -1,7 +1,7 @@
 package org.xluz.droidacts.drangenotes
-/**
+/*
 Data class to hold values of the UI elements of various fragments/activity
-Copyright(C) 2023 by Cecil Cheung PhD
+Copyright(C) 2024 by Cecil Cheung PhD
 
 This source code file is released under GNU General Public License version 3.
 See www.gnu.org/licenses/gpl-3.0.html
@@ -19,7 +19,7 @@ class QuerylogsViewmodel : ViewModel() {
     var golfernum = arrayListOf<Int>()                // alt syntax
     var sticksnames = arrayOf<String>()
     var vRecentQuery: Int = 0
-    var vGolfer: Int = 0    // =NA/any
+    var vGolfer: Int = 0    // =NA/any , use golferSN
     var vLogsText: MutableLiveData<String> = MutableLiveData()
     var sessShotCount: Int? = null
     var sessTeetime: Long? = 0    //unix time in seconds
@@ -38,6 +38,7 @@ class QuerylogsViewmodel : ViewModel() {
             }
         }
         theDB?.theDAO()?.getSticksDefault()?.let {
+        // only the first 14 sticks are retrived, for now
             if(it.isNotEmpty()) sticksnames = it.toTypedArray()
         }
      }

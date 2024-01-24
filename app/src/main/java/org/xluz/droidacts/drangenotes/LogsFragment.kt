@@ -1,7 +1,7 @@
 package org.xluz.droidacts.drangenotes
 /**
 An Android app to record shots distances during driving range practice
-Copyright(C) 2023 by Cecil Cheung PhD
+Copyright(C) 2024 by Cecil Cheung PhD
 
 This source code file is released under GNU General Public License version 3.
 See www.gnu.org/licenses/gpl-3.0.html
@@ -82,7 +82,7 @@ class LogsFragment : Fragment() {
                 // no need
             }
         }
-// try data binding to textview, lifecycle owner is needed by LiveData
+    // try data binding to textview, lifecycle owner is needed by LiveData
         binding.localviewm = querylogsViewmodel0
         binding.lifecycleOwner = viewLifecycleOwner
         // not sure if we need this
@@ -90,7 +90,7 @@ class LogsFragment : Fragment() {
 //            binding.allshotslogs.text = it
 //        }
 
-// set default logs to be all shots in current session
+    // set default logs to be all shots in current session
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 querylogsViewmodel0.vGolfer = 0

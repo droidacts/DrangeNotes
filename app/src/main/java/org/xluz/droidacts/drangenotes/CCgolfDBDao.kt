@@ -1,5 +1,11 @@
 package org.xluz.droidacts.drangenotes
+/**
+The interface between in-code data structures and the room (sqlite) database
+Copyright(C) 2024 by Cecil Cheung PhD
 
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
+ */
 import androidx.room.*
 
 @Dao

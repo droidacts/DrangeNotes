@@ -1,10 +1,16 @@
 package org.xluz.droidacts.drangenotes
+/**
+Definition of a data class to represent a SQL table access (generate) thro room database
+Copyright(C) 2024 by Cecil Cheung PhD
 
+This source code file is released under GNU General Public License version 3.
+See www.gnu.org/licenses/gpl-3.0.html
+ */
 import androidx.room.*
-import java.text.SimpleDateFormat
 import java.util.*
+import java.text.SimpleDateFormat
 
-// need to reconcile with table Shots in cc-golf.db
+// altering this data class will cause a database migration
 @Entity(
     tableName = "Shots",
     foreignKeys = [
@@ -33,7 +39,7 @@ data class Shotdata(
     }
     override fun toString(): String {
         // use in logs
-        val dtformat = SimpleDateFormat("HH:mm")
+        val dtformat = SimpleDateFormat("HH:mm", Locale.US)
         var outstr = dtformat.format(Date(1000L* datetime!!))
         outstr += " [$golfer] club $stick at $power >> $dist yds ($sshape)"
         outstr += " { $comment ; $loc }"

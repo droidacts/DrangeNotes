@@ -21,17 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/previous"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Spinner
         android:id="@+id/playername2"
         android:layout_width="160dp"
@@ -65,635 +54,692 @@
             android:ems="4"
             android:text="@string/text_yards"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="0" />
 
         <TextView
+            android:id="@+id/Cell10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
             android:gravity="center_horizontal"
             android:text="@string/powervalue_full"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="0" />
 
         <TextView
+            android:id="@+id/Cell20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
             android:gravity="center_horizontal"
             android:text="@string/powervalue_75"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="0" />
 
         <TextView
+            android:id="@+id/Cell30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
             android:gravity="center_horizontal"
             android:text="@string/powervalue_50"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="0" />
 
         <TextView
-            android:id="@+id/URcell"
+            android:id="@+id/Cell40"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="3"
             android:gravity="center_horizontal"
             android:text="@string/powervalue_low"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="4"
             app:layout_columnWeight="1"
             app:layout_row="0" />
 
         <TextView
+            android:id="@+id/Cell01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_14"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="1" />
 
         <TextView
+            android:id="@+id/Cell02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_13"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="2" />
 
         <TextView
+            android:id="@+id/Cell03"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_12"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="3" />
 
         <TextView
+            android:id="@+id/Cell04"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_11"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="4" />
 
         <TextView
+            android:id="@+id/Cell05"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_10"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="5" />
 
         <TextView
+            android:id="@+id/Cell06"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_9"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="6" />
 
         <TextView
+            android:id="@+id/Cell07"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_8"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="7" />
 
         <TextView
+            android:id="@+id/Cell08"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_7"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="8" />
 
         <TextView
+            android:id="@+id/Cell09"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_6"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="9" />
 
         <TextView
+            android:id="@+id/Cell0A"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_5"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="10" />
 
         <TextView
+            android:id="@+id/Cell0B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_4"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="11" />
 
         <TextView
+            android:id="@+id/Cell0C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_3"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="12" />
 
         <TextView
+            android:id="@+id/Cell0D"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="13" />
 
         <TextView
-            android:id="@+id/LLcell"
+            android:id="@+id/Cell0E"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_stick_1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_column="0"
             app:layout_columnWeight="1.5"
             app:layout_row="14" />
 
         <EditText
             android:id="@+id/cell11"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/text_spaceholder1"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="101"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="1" />
 
         <EditText
             android:id="@+id/cell12"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="102"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="2" />
 
         <EditText
             android:id="@+id/cell13"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="103"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
         <EditText
             android:id="@+id/cell14"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="104"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="4" />
 
         <EditText
             android:id="@+id/cell15"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="105"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="5" />
 
         <EditText
             android:id="@+id/cell16"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="106"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="6" />
 
         <EditText
             android:id="@+id/cell17"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="107"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="7" />
 
         <EditText
             android:id="@+id/cell18"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="108"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="8" />
 
         <EditText
             android:id="@+id/cell19"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="109"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="9" />
 
         <EditText
             android:id="@+id/cell1A"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="110"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="10" />
 
         <EditText
             android:id="@+id/cell1B"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="111"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="11" />
 
         <EditText
             android:id="@+id/cell1C"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="112"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="12" />
 
         <EditText
             android:id="@+id/cell1D"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="113"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="13" />
 
         <EditText
             android:id="@+id/cell1E"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="114"
             app:layout_column="1"
             app:layout_columnWeight="1"
             app:layout_row="14" />
 
         <EditText
             android:id="@+id/cell21"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="201"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="1" />
 
         <EditText
             android:id="@+id/cell22"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="202"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="2" />
 
         <EditText
             android:id="@+id/cell23"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="203"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
         <EditText
             android:id="@+id/cell24"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="204"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="4" />
 
         <EditText
             android:id="@+id/cell25"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="205"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="5" />
 
         <EditText
             android:id="@+id/cell26"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="206"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="6" />
 
         <EditText
             android:id="@+id/cell27"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="207"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="7" />
 
         <EditText
             android:id="@+id/cell28"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="208"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="8" />
 
         <EditText
             android:id="@+id/cell29"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="209"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="9" />
 
         <EditText
             android:id="@+id/cell2A"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="210"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="10" />
 
         <EditText
             android:id="@+id/cell2B"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="211"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="11" />
 
         <EditText
             android:id="@+id/cell2C"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="212"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="12" />
 
         <EditText
             android:id="@+id/cell2D"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="213"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="13" />
 
         <EditText
             android:id="@+id/cell2E"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="214"
             app:layout_column="2"
             app:layout_columnWeight="1"
             app:layout_row="14" />
 
         <EditText
             android:id="@+id/cell31"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="301"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="1" />
 
         <EditText
             android:id="@+id/cell32"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="302"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="2" />
 
         <EditText
             android:id="@+id/cell33"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="303"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
         <EditText
             android:id="@+id/cell34"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="304"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="4" />
 
         <EditText
             android:id="@+id/cell35"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="305"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="5" />
 
         <EditText
             android:id="@+id/cell36"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="306"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="6" />
 
         <EditText
             android:id="@+id/cell37"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="307"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="7" />
 
         <EditText
             android:id="@+id/cell38"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="308"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="8" />
 
         <EditText
             android:id="@+id/cell39"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="309"
             app:layout_column="3"
             app:layout_columnWeight="1"
             app:layout_row="9" />
 
         <EditText
             android:id="@+id/cell41"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="401"
             app:layout_column="4"
             app:layout_columnWeight="1"
             app:layout_row="1" />
 
         <EditText
             android:id="@+id/cell42"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="402"
             app:layout_column="4"
             app:layout_columnWeight="1"
             app:layout_row="2" />
 
         <EditText
             android:id="@+id/cell43"
-            style="@style/TextInputA"
+            style="@style/TextInputA_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="403"
             app:layout_column="4"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
         <EditText
             android:id="@+id/cell44"
-            style="@style/TextInputB"
+            style="@style/TextInputB_xs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:tag="404"
             app:layout_column="4"
             app:layout_columnWeight="1"
             app:layout_row="4" />
@@ -702,47 +748,52 @@
             android:id="@+id/check_st"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/baseline_arrow_upward_24"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:checked="false"
-            android:gravity="center"
+            android:background="@drawable/exboxborder"
+            android:checked="true"
+            android:drawableTop="@drawable/baseline_arrow_upward_24"
+            android:drawableTint="@color/checkon_off"
+            android:drawableTintMode="src_atop"
             android:text="@string/button_straight_0"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:visibility="invisible"
-            app:layout_column="3"
-            app:layout_columnSpan="2"
+            app:layout_column="4"
             app:layout_columnWeight="1"
-            app:layout_row="11" />
+            app:layout_row="9"
+            app:layout_rowSpan="2" />
 
         <CheckedTextView
             android:id="@+id/check_miss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
+            android:background="@drawable/exboxborder"
+            android:checkMark="@android:drawable/button_onoff_indicator_off"
+            android:checkMarkTint="@color/checkon_off"
             android:checked="false"
             android:gravity="center"
             android:text="@string/button_missed_0"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:visibility="invisible"
             app:layout_column="3"
             app:layout_columnSpan="2"
             app:layout_columnWeight="1"
-            app:layout_row="14" />
+            app:layout_row="13" />
 
         <CheckedTextView
             android:id="@+id/check_R"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/baseline_turn_slight_right_24"
-            android:drawableTint="@android:color/holo_blue_light"
-            android:text="@string/button_right_1"
+            android:background="@drawable/exboxborder"
+            android:drawableRight="@drawable/baseline_turn_slight_right_24"
+            android:drawableTint="@color/checkon_off"
+            android:text="@string/button_right_0"
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:visibility="invisible"
             app:layout_column="4"
             app:layout_columnWeight="1"
-            app:layout_row="12"
+            app:layout_row="11"
             app:layout_rowSpan="2"
             tools:ignore="RtlHardcoded" />
 
@@ -751,17 +802,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/exboxborder"
-            android:drawableTop="@drawable/baseline_turn_slight_left_24"
-            android:drawableTint="@android:color/holo_blue_light"
-            android:text="@string/button_left_1"
+            android:drawableLeft="@drawable/baseline_turn_slight_left_24"
+            android:drawableTint="@color/checkon_off"
+            android:text="@string/button_left_0"
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:visibility="invisible"
             app:layout_column="3"
             app:layout_columnWeight="1"
-            app:layout_row="12"
+            app:layout_row="11"
             app:layout_rowSpan="2"
             tools:ignore="RtlHardcoded" />
-
     </androidx.gridlayout.widget.GridLayout>
 
     <TableLayout
