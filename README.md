@@ -4,6 +4,7 @@
 - Jan 2024:
 The project is now configured for android studio hedgehog with build tools SDK 34.
 The app has been tested only on one old android phone running 7.1.1.
+If you update the initial DB file in assets, an app uninstall + phone reboot may be needed.
 
 ### Summary
 The name of the app is "Drange Logs". It is made to help with logging shots while practising in a driving range facility. Typical uses are:

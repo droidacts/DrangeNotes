@@ -9,7 +9,6 @@ See www.gnu.org/licenses/gpl-3.0.html
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.core.view.children
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import org.xluz.droidacts.drangenotes.databinding.FragmentSecondBinding
 
@@ -396,13 +396,11 @@ class SecondFragment : Fragment() {
         //clrAllEditboxes()
         loadtoNotesGrid()
         restoreFrViewmodel()
-        //Log.d("Frag2", "inside onResume.")
         super.onResume()
     }
 
     override fun onPause() {
         saveToViewmodel()
-        //Log.d("Frag2", "inside onPause.")
         super.onPause()
     }
 

@@ -13,8 +13,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import android.view.inputmethod.EditorInfo
-//import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.widget.addTextChangedListener
@@ -43,7 +41,7 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
         mViewmodel.singleShot.observe(viewLifecycleOwner, Observer {
-            //mShotdata1 = mViewmodel.singleShot.value!!
+
             Log.d("ViewM", "livedata obs: "+mViewmodel.updatelog)
             if(mViewmodel.updatelog > 1) {
                 mShotdata1 = it
@@ -245,14 +243,12 @@ class FirstFragment : Fragment() , AdapterView.OnItemSelectedListener {
     }
 
     override fun onResume() {
-        //Log.d("Frag1", "inside onResume:1")
         restoreFrViewmodel()
         activity?.findViewById<View>(R.id.fab)?.visibility = View.VISIBLE
         super.onResume()
     }
 
     override fun onPause() {
-        //Log.d("Frag1", "inside onPause:1")
         saveStateToViewmodel()
         super.onPause()
     }

@@ -73,6 +73,7 @@ INSERT INTO "Traj" ("type","desc","icon") VALUES (3,'straight',NULL);
 INSERT INTO "Traj" ("type","desc","icon") VALUES (4,'miss',NULL);
 INSERT INTO "Traj" ("type","desc","icon") VALUES (8,'curve',NULL);
 INSERT INTO "Traj" ("type","desc","icon") VALUES (16,'curve++',NULL);
+INSERT INTO "Traj" ("type","desc","icon") VALUES (128,'Avg',NULL);
 INSERT INTO "Bags" ("id","golfer","desc","s01","s02","s03","s04","s05","s06","s07","s08","s09","s10","s11","s12","s13","s14") VALUES (1,0,'default',14,12,11,10,9,8,7,6,5,4,3,2,1,15);
 INSERT INTO "Bags" ("id","golfer","desc","s01","s02","s03","s04","s05","s06","s07","s08","s09","s10","s11","s12","s13","s14") VALUES (2,0,'Range',14,13,12,11,10,9,8,7,6,5,4,3,2,1);
 COMMIT;

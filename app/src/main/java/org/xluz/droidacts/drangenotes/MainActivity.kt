@@ -6,10 +6,12 @@ This source code file is released under GNU General Public License version 3.
 See www.gnu.org/licenses/gpl-3.0.html
  */
 
-import android.Manifest
+import android.app.Activity
 import android.os.Bundle
 import android.content.Context
-import android.content.pm.PackageManager
+import android.content.Intent
+import android.util.Log
+import java.util.Date
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,11 +21,9 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import java.util.Date
 import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 
 private const val SETTINGKEY1 = "appSettings_use_meters"
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         theDB = CCgolfDB.get(this)    // init the DB connection
         mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
         if(mainViewmodel.golfername.isEmpty()) mainViewmodel.loadGolfernames()
-        if(manyShots.sticksnames.isEmpty())
+        if(manyShots.sticksnames.isEmpty())    // fallback, just in case
             manyShots.sticksnames = resources.getStringArray(R.array.default_sticknames)
         clrManyShots()
 
@@ -68,19 +68,19 @@ class MainActivity : AppCompatActivity() {
                         "Shot(" + manyShots.shots.size + ") " + singleshotv.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Logging", null).show()
                 else
-                    Snackbar.make(it, "Not logged; invalid DB?", Snackbar.LENGTH_LONG)
+                    Snackbar.make(it, "Error logging; invalid DB?", Snackbar.LENGTH_LONG)
                         .setAction("Error!", null).show()
             } else
                 Snackbar.make(it, "Nothing to log.", Snackbar.LENGTH_LONG).show()
             mainViewmodel.datrdy = false
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         val appSharedpref0 = getPreferences(Context.MODE_PRIVATE)
+        // some preference settings are also menu items
         menu.findItem(R.id.menu_settings).isChecked = appSharedpref0
             .getBoolean(SETTINGKEY1, false)
 
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.menu_about -> {
-/*
+/*      // Toasts allow more texts than Snackbars?
                 Snackbar.make(binding.root,
                     "ver "+BuildConfig.VERSION_NAME+" by CC", Snackbar.LENGTH_LONG)
                     .setAction("More", null).show()
@@ -117,22 +117,18 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_export -> {    // backup copy DB to media storage
-                if(neededPerms()) {
-                    val DBf = this.getDatabasePath(CCgolfDB.DBfilename).toString()
-                    if (CCgolfDB.copyAppDBtoSD())
-                        Snackbar.make(
-                            binding.root,
-                            "$DBf to media storage\nSwipe to dismiss", Snackbar.LENGTH_INDEFINITE
-                        ).show()
-                    else
-                        Snackbar.make(
-                            binding.root,
-                            "$DBf export copy failed!\nSwipe to dismiss", Snackbar.LENGTH_INDEFINITE
-                        ).show()
+                Snackbar.make(binding.root,
+                    "Requesting a user select directory", Snackbar.LENGTH_LONG
+                ).show()
+                // Choose a directory using the system's file picker; only working way since sdk 33
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+                    // Optionally, specify an initial directory URI
+                    //putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
                 }
+                retSelStorageDir.launch(intent)
                 true
             }
-            R.id.menu_logs -> {
+            R.id.menu_logs -> {    // to logs fragment
                 stashManyShots()
 
                 val teetime = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE).getLong(LASTSESSIONLOG_T, 0)
@@ -191,16 +187,22 @@ class MainActivity : AppCompatActivity() {
         return outstr
     }
 
-    private fun neededPerms() : Boolean {
-    // won't work for SDK33 and beyond
-        val p = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if(p != PackageManager.PERMISSION_GRANTED) {
-            // ask for perm at runtime
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 99)
-            return false
+    private val retSelStorageDir = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if(it.resultCode==Activity.RESULT_OK) {
+            val userFileDir = it.data?.data!!  //suppose to be a uri
+            Log.d("FileOp", userFileDir.toString())
+
+            if(CCgolfDB.copyAppDBtoSD(applicationContext, userFileDir)) {
+                //Snackbar.make(binding.root,
+                Toast.makeText(this,
+                    CCgolfDB.DBfilename+ " to\n"+userFileDir.toString() ,
+                    Toast.LENGTH_LONG
+                ).show()
+            } else
+                Snackbar.make(binding.root,
+                    "Database export copy failed!\nSwipe to dismiss", Snackbar.LENGTH_INDEFINITE
+                ).show()
         }
-        return true
     }
 
 }

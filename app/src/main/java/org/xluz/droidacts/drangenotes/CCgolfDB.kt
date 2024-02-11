@@ -6,8 +6,9 @@ Copyright(C) 2024 by Cecil Cheung PhD
 This source code file is released under GNU General Public License version 3.
 See www.gnu.org/licenses/gpl-3.0.html
  */
+
 import android.content.Context
-import android.os.Environment
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -18,7 +19,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.nio.channels.Channels
+import android.net.Uri
+import androidx.documentfile.provider.DocumentFile
 
 @Database(
     entities = [Shotdata::class, Golferdata::class, Pleveldata::class, Stickdata::class, Trajdata::class, Bagdata::class],
@@ -34,17 +37,18 @@ abstract class CCgolfDB : RoomDatabase() {
         private var oneINSTANCE: CCgolfDB? = null
         private var DBfullpath: File? = null
 
-        fun get(context: Context): CCgolfDB {
+        fun get(actmain: Context): CCgolfDB {
             if (oneINSTANCE == null) {
                 oneINSTANCE = Room.databaseBuilder(
-                    context.applicationContext,
+                    actmain.applicationContext,
                     CCgolfDB::class.java,
                     DBfilename
                 )
-                    .createFromAsset("roomCCgolf.db")
+                    .createFromAsset("roomCCgolf-v3c.db")
                     .allowMainThreadQueries()    //for testing
                     .build()
-                DBfullpath = context.getDatabasePath(DBfilename)
+                DBfullpath = actmain.getDatabasePath(DBfilename)
+                Log.d("appDB", "gerating new .db from asset")
             }
             return oneINSTANCE as CCgolfDB
         }
@@ -65,31 +69,32 @@ abstract class CCgolfDB : RoomDatabase() {
             return retv
         }
 
-        fun copyAppDBtoSD(): Boolean {  //may not work in SDK 33+
-            val outdir = Environment.getExternalStoragePublicDirectory("backup").absolutePath
+        fun copyAppDBtoSD(appContext: Context, outdir: Uri): Boolean {
+            val outfile = DocumentFile.fromTreeUri(appContext, outdir)
+                ?.createFile("application/x-sqlite3", DBfilename)
+            Log.d("FileOp", appContext.contentResolver.getType(outfile!!.uri) ?: "Null!")
+            val outs = outfile.uri.let { uri ->
+                appContext.contentResolver.openOutputStream(uri)
+            }
             val infile = DBfullpath
-                ?: File("/data/data/org.xluz.droidacts.drangenotes/databases/" + DBfilename)
-            if (infile.exists()) {
+                ?: File(appContext.filesDir.canonicalFile,"/databases/$DBfilename")    // fallback
+            Log.d("FileOp", infile.toString())
+            Log.d("FileOp",File(appContext.filesDir.canonicalFile,"/databases/$DBfilename").toString())
+            if (infile.exists() && outs!=null) {
                 CoroutineScope(Dispatchers.IO).launch {
                     compacDB()
-                    if (!File(outdir).exists()) {
-                        File(outdir).mkdir()
-                    }
-                    val outfile = File("$outdir/$DBfilename")
-                    if (File(outdir).exists()) {
+//
                         try {
                             withContext(Dispatchers.IO) {
-                                FileInputStream(infile).channel
-                            }.use { src ->
-                                FileOutputStream(outfile).channel.use { dst ->
-                                    dst.transferFrom(src, 0, src.size())
+                                FileInputStream(infile).channel}.use { src ->
+                                Channels.newChannel(outs).use { dst ->
+                                    //dst.transferFrom(src, 0, src.size())
+                                    src.transferTo(0, src.size(), dst)
                                 }
                             }
                         } catch (e: Exception) {    // copy fail
-                            //log the error?
+                            Log.d("FileOp", "outstream IO error")
                         }
-                    }
-
                 }
             } else
                 return false
