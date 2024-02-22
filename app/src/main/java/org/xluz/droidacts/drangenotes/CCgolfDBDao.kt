@@ -10,9 +10,11 @@ import androidx.room.*
 
 @Dao
 interface CCgolfDBDao {
+    @Query("SELECT sqlite_version()")
+    fun getSqliteVer(): String
+
     @Query("SELECT * FROM Golfers ORDER BY id")
     fun getGolfers(): List<Golferdata>
-
     @Query("SELECT title FROM Sticks ORDER BY id LIMIT 14")
     fun getSticksDefault(): List<String>
 
@@ -34,5 +36,5 @@ interface CCgolfDBDao {
     @Query("SELECT * from Shots WHERE (golfer=:player) and (datetime BETWEEN :timenow-86400 AND :timenow) ORDER BY datetime")
     suspend fun getRecentdayShotsBy(timenow: Long, player: Int): List<Shotdata>
     @Query("SELECT * from Shots WHERE (golfer=:player) and (datetime > :ttime) ORDER BY datetime DESC LIMIT :n")
-    suspend fun getLastNShotsBySince(n: Int, player: Int, ttime: Long,): List<Shotdata>
+    suspend fun getLastNShotsBySince(n: Int, player: Int, ttime: Long): List<Shotdata>
 }

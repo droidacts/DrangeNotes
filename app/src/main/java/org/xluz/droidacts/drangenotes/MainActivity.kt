@@ -24,12 +24,13 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
 
 private const val SETTINGKEY1 = "appSettings_use_meters"
 private const val LASTSESSIONLOG = "last_session_data"
 private const val LASTSESSIONLOG_T = "tee_time"
-//private const val LASTSESSIONLOG_KEY1 = "infoLog"
+//private const val LASTSESSIONLOG_MISC = "info"
 private const val LASTSESSIONLOG_KEYALL = "all_shots"
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewmodel: OneShotdataViewmodel
     private lateinit var theDB: CCgolfDB
+    private val sqliteVer: String by lazy { if(::theDB.isInitialized) theDB.theDAO().getSqliteVer() else "??" }
     private val manyShots: QuerylogsViewmodel by viewModels()    // should be scoped to this Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,11 +101,12 @@ class MainActivity : AppCompatActivity() {
                     .setAction("More", null).show()
 */
                 Toast.makeText(this,
-                    "Ver "+BuildConfig.VERSION_NAME+" Copyright 2024 by CC\nDistribute under GPL v3",
+                    "\u2022 Ver "+BuildConfig.VERSION_NAME+" Copyright 2024 by CC\n\tDistribute under GPL v3"+
+                    "\n\u2022 Sys fw: API ${android.os.Build.VERSION.SDK_INT}, SQLite: $sqliteVer",
                     Toast.LENGTH_LONG).show()
                 true
             }
-            R.id.menu_settings -> {
+            R.id.menu_settings -> {    // this setting is unused/unimplemented
                 item.isChecked = !item.isChecked        //toggle
                 val appSharedpref0 = getPreferences(Context.MODE_PRIVATE)
                 with(appSharedpref0.edit()) {
@@ -116,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                 clrManyShots()
                 true
             }
-            R.id.menu_export -> {    // backup copy DB to media storage
+            R.id.menu_export -> {      // backup copy DB to media storage
                 Snackbar.make(binding.root,
                     "Requesting a user select directory", Snackbar.LENGTH_LONG
                 ).show()
@@ -175,16 +178,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stashManyShots() : String {
-        var outstr = ""
-        for (itm in manyShots.shots)
-            outstr += itm.toString() + "\n"
+//        var outstr = ""
+//        for (itm in manyShots.shots)
+//            outstr += itm.toString() + "\n"
+        // current session shots data also stored as JSON array
+        val jsonOutstr = Gson().toJson(manyShots.shots)
         // mostly for debugging
         val appSharedpref1 = getSharedPreferences(LASTSESSIONLOG, MODE_PRIVATE)
         with(appSharedpref1.edit()) {
-            putString(LASTSESSIONLOG_KEYALL, outstr)
+            putString(LASTSESSIONLOG_KEYALL, jsonOutstr)
             apply()
         }
-        return outstr
+        return jsonOutstr
     }
 
     private val retSelStorageDir = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

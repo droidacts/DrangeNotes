@@ -48,7 +48,7 @@ abstract class CCgolfDB : RoomDatabase() {
                     .allowMainThreadQueries()    //for testing
                     .build()
                 DBfullpath = actmain.getDatabasePath(DBfilename)
-                Log.d("appDB", "gerating new .db from asset")
+                Log.d("appDB", "generating new .db from asset")
             }
             return oneINSTANCE as CCgolfDB
         }

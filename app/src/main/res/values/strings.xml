@@ -1,12 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Driving Range Logs</string>
-    <string name="second_fragment_label">Driving Range Notes</string>
+    <string name="first_fragment_label">Log the Shot</string>
+    <string name="second_fragment_label">Range Notes</string>
     <string name="logs_fragment_label">Shots logged</string>
-    <string name="next">Notes style</string>
-    <string name="previous">\>Compact</string>
-    <string name="hello_first_fragment">Golfer</string>
-    <string name="hello_second_fragment">Log the entry</string>
     <!-- -->
     <string name="app_name">Drange Logs</string>
     <string name="menu_item_settings">use meters</string>
@@ -47,7 +43,7 @@
     <string name="text_yds">yds</string>
     <string name="text_spaceholder1" />
     <string name="large_text">
-        "Choose a player and recent option, then press Query to refresh logs.\n"
+        "Choose a player and recent option, then refresh logs.\n"
     </string>
     <string name="button_export_log">Export</string>
     <string name="button_query_log">Query</string>
