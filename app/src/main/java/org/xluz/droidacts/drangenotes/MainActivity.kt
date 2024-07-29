@@ -23,6 +23,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import org.xluz.droidacts.drangenotes.databinding.ActivityMainBinding
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)    // prevent dark mode
 
         theDB = CCgolfDB.get(this)    // init the DB connection
         mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
