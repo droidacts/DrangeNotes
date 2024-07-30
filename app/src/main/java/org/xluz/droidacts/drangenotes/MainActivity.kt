@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)    // prevent dark mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)    // prevent dark mode
 
         theDB = CCgolfDB.get(this)    // init the DB connection
         mainViewmodel = ViewModelProvider(this).get( OneShotdataViewmodel::class.java )
