@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 */
                 Toast.makeText(this,
                     "\u2022 Ver "+BuildConfig.VERSION_NAME+" Copyright 2024 by CC\n\tDistribute under GPL v3"+
-                    "\n\u2022 Sys fw: API ${android.os.Build.VERSION.SDK_INT}, SQLite: $sqliteVer",
+                    "\n\u2022 Sys: API ${android.os.Build.VERSION.SDK_INT}, SQLite: $sqliteVer",
                     Toast.LENGTH_LONG).show()
                 true
             }

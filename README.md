@@ -1,5 +1,12 @@
 #  D[riving]-range-notes
 ## Logger app for golf shots
+- May 2026: Maintenance release
+    - Rebuild with android studio Panda4, compile and target SDK set to 36. 
+    - Updated kotlin version and some androidx lib version.
+
+- Jul 2025:
+Rebuilt using android studio Ladybug (2024.2.2.15) targeting SDK 35 as required.
+We have tested the app on a current android 14 phone.
 
 - Jan 2024:
 The project is now configured for android studio hedgehog with build tools SDK 34.
